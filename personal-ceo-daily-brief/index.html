@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101a31">
+<title>Personal CEO — Daily Brief</title>
+<style>
+:root{--bg:#0a1224;--panel:#121f38;--panel2:#192b4a;--ink:#f6f8ff;--muted:#aab8d1;--line:#ffffff20;--blue:#a9c4ff;--mint:#a7ead7;--gold:#ffd28b;--rose:#ffb9c3}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 88% 0%,#2a3c68 0,transparent 32%),var(--bg);color:var(--ink);font:15px/1.55 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}header,main,footer{width:min(1000px,calc(100% - 32px));margin:auto}header{padding:38px 0 22px}.eyebrow{color:var(--mint);font-size:.75rem;font-weight:850;letter-spacing:.16em;text-transform:uppercase}h1{font-size:clamp(2.5rem,7vw,4.8rem);line-height:.98;letter-spacing:-.06em;margin:12px 0}h1 span{color:var(--blue)}.subtitle{color:var(--muted);max-width:700px;font-size:1.06rem}.toolbar{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-top:18px}.date{padding:10px;border:1px solid var(--line);border-radius:10px;background:#ffffff09;color:var(--ink);font:inherit}.btn{padding:10px 14px;border:1px solid var(--line);border-radius:11px;background:#ffffff0b;color:var(--ink);font:inherit;font-weight:750;cursor:pointer}.btn.primary{background:var(--blue);color:#111b31;border-color:var(--blue)}button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid var(--mint);outline-offset:2px}.status{margin-left:auto;color:var(--muted);font-size:.82rem}.card{background:linear-gradient(145deg,#172746ed,#101b32);border:1px solid var(--line);border-radius:18px;padding:clamp(16px,3vw,25px);margin:14px 0;box-shadow:0 12px 35px #0002}.cardhead{display:flex;gap:12px;align-items:flex-start;margin-bottom:14px}.num{flex-shrink:0;width:38px;height:38px;border-radius:12px;background:#a9c4ff20;color:var(--blue);display:grid;place-items:center;font-weight:900}.card h2{margin:0;font-size:1.25rem}.kicker{color:var(--muted);font-size:.78rem}.task{display:flex;gap:11px;align-items:flex-start;padding:12px 0;border-top:1px solid var(--line)}.task input{accent-color:var(--mint);width:19px;height:19px;flex-shrink:0;margin-top:3px}.task label{flex:1;cursor:pointer}.task strong{display:block}.task small{display:block;color:var(--muted);margin-top:3px}.task input:checked+label strong{text-decoration:line-through;color:var(--muted)}.tag{display:inline-block;padding:3px 8px;border:1px solid var(--line);border-radius:99px;color:var(--mint);font-size:.73rem;font-weight:750}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.prompt{border:1px solid var(--line);border-radius:13px;padding:14px;background:#ffffff05}.prompt h3{margin:0 0 7px;font-size:1rem}.muted{color:var(--muted)}textarea,input[type=text],select{width:100%;background:#0b1730;border:1px solid var(--line);color:var(--ink);border-radius:10px;padding:10px;font:inherit}textarea{min-height:85px;resize:vertical}.fieldlabel{display:block;margin:10px 0 6px;font-weight:700}.answer{margin-top:10px;color:var(--mint);font-size:.9rem}.securitytip{border-left:3px solid var(--gold);padding:13px 15px;background:#ffd28b0b;border-radius:0 12px 12px 0}.securitytip strong{color:var(--gold)}.footerfocus{background:linear-gradient(100deg,#233b68,#263055);border:1px solid #8ba9f34a;border-radius:18px;padding:21px;margin:18px 0 28px}.footerfocus .label{font-size:.72rem;color:var(--mint);font-weight:850;letter-spacing:.16em}.footerfocus p{font-size:clamp(1.15rem,3vw,1.7rem);font-weight:850;line-height:1.25;margin:8px 0 0}.small{font-size:.84rem}.progress{height:7px;background:#ffffff20;border-radius:99px;overflow:hidden;margin:14px 0}.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--mint));transition:width .2s}.footer{color:var(--muted);font-size:.82rem;padding-bottom:28px}.saved{color:var(--mint);font-size:.83rem}
+@media(max-width:650px){header{padding-top:25px}.grid2{grid-template-columns:1fr}.status{width:100%;margin-left:0}.card{border-radius:15px}.btn{min-height:43px}.toolbar .btn{flex:1}.date{width:100%}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header>
+<div class="eyebrow">Personal CEO • Daily operating brief</div>
+<h1>Run the day.<br><span>Build the future.</span></h1>
+<p class="subtitle">A focused daily brief for priorities, better decisions, sustainable fitness and practical cybersecurity. Choose a date, personalize your goals, and track what you complete.</p>
+<div class="toolbar"><input id="briefDate" class="date" type="date" aria-label="Brief date"><button class="btn" id="today">Today</button><button class="btn primary" id="save">Save today's brief</button><button class="btn" id="export">Export notes</button><span id="status" class="status" aria-live="polite">Ready</span></div>
+<div class="progress"><span id="progressBar"></span></div><div class="small muted" id="progressText">0 of 5 goals complete</div>
+</header>
+<main>
+<section class="card">
+<div class="cardhead"><div class="num">01</div><div><h2>Daily Goals</h2><div class="kicker">Prioritize impact over activity</div></div><span class="tag" id="goalTag" style="margin-left:auto">0 / 5</span></div>
+<div id="goals"></div>
+<label class="fieldlabel" for="goal1">Personalize a goal for today</label><input type="text" id="goal1" maxlength="180" placeholder="Example: Finish one important client follow-up">
+<div class="grid2" style="margin-top:10px"><div class="prompt"><h3>Productivity</h3><p class="muted small">Choose one high-value task. Work on it before low-priority messages when practical.</p></div><div class="prompt"><h3>Long-term progress</h3><p class="muted small">Take one small step toward a skill, business system or financial plan.</p></div></div>
+</section>
+<section class="card">
+<div class="cardhead"><div class="num">02</div><div><h2>Decision-Making</h2><div class="kicker">Separate facts, assumptions and reversible choices</div></div></div>
+<div class="prompt"><h3>Today's decision question</h3><p>What decision am I delaying, and what is the smallest safe step that would give me better information?</p></div>
+<label class="fieldlabel" for="pending">Any pending decision or dilemma?</label><textarea id="pending" placeholder="Describe the decision, options, constraints and deadline. Avoid confidential information."></textarea>
+<label class="fieldlabel" for="decisionFramework">Quick framework</label><select id="decisionFramework"><option value="reversible">Reversible vs. hard-to-reverse</option><option value="evidence">Evidence vs. assumptions</option><option value="opportunity">Opportunity cost</option><option value="premortem">Pre-mortem: what could go wrong?</option></select>
+<div class="answer" id="frameworkAnswer" aria-live="polite"></div>
+</section>
+<section class="card">
+<div class="cardhead"><div class="num">03</div><div><h2>Fitness & Recovery</h2><div class="kicker">Consistency first; scale effort gradually</div></div></div>
+<div class="grid2">
+<div class="prompt"><span class="tag">Movement</span><h3 style="margin-top:9px">20–30 minutes, adjusted to your level</h3><p class="muted small">Choose a comfortable brisk walk, mobility routine or familiar strength session. Start easy; stop if you feel pain, dizziness or unwell.</p></div>
+<div class="prompt"><span class="tag">Recovery</span><h3 style="margin-top:9px">Support tomorrow's energy</h3><p class="muted small">Eat regular balanced meals with protein, vegetables/fruit and carbohydrates; drink water to thirst and protect a consistent sleep window.</p></div>
+</div>
+<label class="fieldlabel" for="fitnessPlan">Adjust today's plan</label><input type="text" id="fitnessPlan" maxlength="180" placeholder="Example: 20-minute walk + 5 minutes mobility">
+<p class="muted small">Progress gradually based on how you feel, your experience and any health guidance you follow. No need to make up missed sessions.</p>
+</section>
+<section class="card">
+<div class="cardhead"><div class="num">04</div><div><h2>Cybersecurity Habit</h2><div class="kicker">One practical check today</div></div></div>
+<div class="securitytip"><strong>Today's check: Secure your most important account.</strong><p style="margin:6px 0 0">Open the account's official app or type its known address yourself. Check that multifactor authentication is enabled, recovery details are current, and no unfamiliar active sessions are present. Never share one-time codes.</p></div>
+<label class="task" style="margin-top:12px"><input id="securityDone" type="checkbox"><span><strong>I completed today's security check.</strong><small>Mark only after you have checked it.</small></span></label>
+<label class="fieldlabel" for="securityNote">Optional note</label><input id="securityNote" type="text" maxlength="160" placeholder="Example: Reviewed email account sessions">
+</section>
+<section class="card">
+<div class="cardhead"><div class="num">05</div><div><h2>CEO Review</h2><div class="kicker">Close the loop before the day ends</div></div></div>
+<div class="grid2"><div><label class="fieldlabel" for="win">One win</label><textarea id="win" placeholder="What moved forward?"></textarea></div><div><label class="fieldlabel" for="tomorrow">Tomorrow's first priority</label><textarea id="tomorrow" placeholder="What should be ready to start?"></textarea></div></div>
+<p id="saveMessage" class="saved" aria-live="polite"></p>
+</section>
+<section class="footerfocus"><div class="label">FOCUS OF THE DAY</div><p id="focusText">Finish the highest-impact task, protect your energy, and secure one important account.</p><div class="toolbar"><button class="btn" id="refreshFocus">Refresh focus</button></div></section>
+<div class="footer">Privacy: this page saves entries in this browser's local storage. It does not send them to a server. Export a backup before clearing browser data, and avoid entering passwords or sensitive business secrets.</div>
+</main>
+<script>
+(function(){
+const KEY='personal-ceo-daily-brief-v1';
+const defaultGoals=[
+{id:'impact',title:'Complete one high-impact work task',detail:'Choose a deliverable that matters; define what “done” means.',done:false},
+{id:'business',title:'Move one business or long-term project forward',detail:'Spend 20–45 focused minutes on a useful next step.',done:false},
+{id:'health',title:'Do manageable movement and recovery',detail:'Choose a comfortable activity and make time for regular meals and sleep.',done:false},
+{id:'learning',title:'Learn or practice one valuable skill',detail:'Use a short, focused session and record one takeaway.',done:false},
+{id:'secure',title:'Complete one cybersecurity check',detail:'Review MFA, recovery details or active sessions on an important account.',done:false}
+];
+const $=id=>document.getElementById(id);
+function today(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function blank(){return {goals:defaultGoals.map(g=>({...g})),goal1:'',pending:'',decisionFramework:'reversible',fitnessPlan:'',securityDone:false,securityNote:'',win:'',tomorrow:''}}
+function load(){try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return {}}}
+let all=load(),data;
+function getDay(){if(!all[$('briefDate').value])all[$('briefDate').value]=blank();return all[$('briefDate').value]}
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(all));$('status').textContent='Saved locally'}catch(e){$('status').textContent='Could not save locally'}}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function renderGoals(){data=getDay();$('goals').innerHTML=data.goals.map(g=>'<div class="task"><input type="checkbox" data-goal="'+esc(g.id)+'" id="g-'+esc(g.id)+'" '+(g.done?'checked':'')+'><label for="g-'+esc(g.id)+'"><strong>'+esc(g.title)+'</strong><small>'+esc(g.detail)+'</small></label></div>').join('');document.querySelectorAll('[data-goal]').forEach(el=>el.addEventListener('change',()=>{data.goals.find(g=>g.id===el.dataset.goal).done=el.checked;persist();updateProgress()}));updateProgress()}
+function updateProgress(){const d=getDay(),done=d.goals.filter(g=>g.done).length,total=d.goals.length;$('goalTag').textContent=done+' / '+total;$('progressText').textContent=done+' of '+total+' goals complete';$('progressBar').style.width=(total?done/total*100:0)+'%'}
+const frameworks={reversible:'If it is reversible, run a small, low-risk test. If it is hard to reverse, slow down and gather stronger evidence.',evidence:'Write down what you know, what you assume, and what evidence would change your mind.',opportunity:'Compare the best alternative you give up by choosing this option—not just its direct cost.',premortem:'Imagine the plan failed. List three plausible causes, then add one prevention step for each.'};
+function fill(){data=getDay();renderGoals();$('goal1').value=data.goal1||'';$('pending').value=data.pending||'';$('decisionFramework').value=data.decisionFramework||'reversible';$('frameworkAnswer').textContent=frameworks[$('decisionFramework').value];$('fitnessPlan').value=data.fitnessPlan||'';$('securityDone').checked=!!data.securityDone;$('securityNote').value=data.securityNote||'';$('win').value=data.win||'';$('tomorrow').value=data.tomorrow||'';$('saveMessage').textContent='';}
+function collect(){data=getDay();data.goal1=$('goal1').value;data.pending=$('pending').value;data.decisionFramework=$('decisionFramework').value;data.fitnessPlan=$('fitnessPlan').value;data.securityDone=$('securityDone').checked;data.securityNote=$('securityNote').value;data.win=$('win').value;data.tomorrow=$('tomorrow').value;persist()}
+$('briefDate').value=today();
+$('today').addEventListener('click',()=>{$('briefDate').value=today();fill()});
+$('briefDate').addEventListener('change',fill);
+$('decisionFramework').addEventListener('change',()=>{$('frameworkAnswer').textContent=frameworks[$('decisionFramework').value];collect()});
+['goal1','pending','fitnessPlan','securityDone','securityNote','win','tomorrow'].forEach(id=>$(id).addEventListener('change',collect));
+$('save').addEventListener('click',()=>{collect();$('saveMessage').textContent='Brief saved for '+$('briefDate').value+'.'});
+$('refreshFocus').addEventListener('click',()=>{const d=getDay(),pending=d.pending.trim(),undone=d.goals.filter(g=>!g.done);let focus;if(undone.length)focus='Start with: '+undone[0].title+'. Protect your energy, then take one practical security step.';else focus='All goals checked: review what worked, capture one lesson, and set up tomorrow.';if(pending)focus+=' Decision to clarify: '+pending.slice(0,110)+(pending.length>110?'…':'');$('focusText').textContent=focus});
+$('export').addEventListener('click',()=>{collect();const blob=new Blob([JSON.stringify(all,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='personal-ceo-daily-brief.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)});
+fill();
+})();
+</script>
+</body>
+</html>
