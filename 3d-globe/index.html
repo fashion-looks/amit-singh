@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#050a16">
+<title>ATLAS — 3D Globe Explorer</title>
+<style>
+:root{color-scheme:dark;--bg:#050a16;--panel:#091326df;--line:#263853;--text:#eaf4ff;--muted:#8b9db8;--cyan:#69e4ff;--blue:#668cff;--green:#71edc3}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--text);font:14px/1.45 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button{font:inherit;cursor:pointer;transition:transform .16s,background .2s,border-color .2s}button:active{transform:scale(.97)}button:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+#scene{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none}.backdrop{position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 48%,#0b234344 0%,#07122520 38%,#030711bb 100%)}.top{position:fixed;left:22px;right:22px;top:18px;display:flex;align-items:center;justify-content:space-between;gap:12px;pointer-events:none}.brand,.actions{pointer-events:auto}.brand{display:flex;align-items:center;gap:11px}.logo{width:42px;height:42px;border-radius:14px;background:linear-gradient(140deg,#7df0ff,#6584ff);color:#07111e;display:grid;place-items:center;font-size:22px;font-weight:900;box-shadow:0 0 30px #69e4ff33}.brand h1{margin:0;font-size:17px;letter-spacing:2px}.brand p{margin:2px 0 0;font-size:11px;color:var(--muted)}.actions{display:flex;gap:8px}.btn{border:1px solid #344660;background:#0c1729d9;color:#dcecff;padding:9px 12px;border-radius:10px;backdrop-filter:blur(14px)}.btn:hover{border-color:#6d91bd;background:#15243a}.btn.primary{background:var(--cyan);color:#05111c;border-color:var(--cyan);font-weight:800}
+.panel{position:fixed;background:var(--panel);border:1px solid #293a54;border-radius:17px;backdrop-filter:blur(20px);box-shadow:0 18px 55px #0006}.locations{left:22px;top:88px;bottom:22px;width:280px;display:flex;flex-direction:column;overflow:hidden}.head{padding:17px 16px 13px;border-bottom:1px solid #25344c}.eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:1.6px;color:var(--cyan);font-weight:800}.head h2{font-size:16px;margin:5px 0 3px}.muted{color:var(--muted);font-size:11px}.list{overflow:auto;padding:8px;flex:1}.place{display:flex;align-items:center;gap:10px;width:100%;padding:10px;border:1px solid transparent;background:transparent;border-radius:11px;color:var(--text);text-align:left}.place:hover{background:#14223a}.place.active{background:#13263b;border-color:#356078}.pin{width:9px;height:9px;border-radius:50%;background:var(--cyan);box-shadow:0 0 13px currentColor;flex:0 0 auto}.place-copy{min-width:0;flex:1}.place-copy strong{display:block;font-size:12px}.place-copy span{display:block;color:var(--muted);font-size:10px;margin-top:2px}.coord{font-size:10px;color:#8298b7;background:#142139;padding:4px 6px;border-radius:6px}.foot{border-top:1px solid #25344c;padding:12px 15px;color:var(--muted);font-size:10px;display:flex;align-items:center;gap:7px}.pulse{width:6px;height:6px;background:var(--green);border-radius:50%;box-shadow:0 0 9px var(--green)}
+.detail{right:22px;top:88px;width:258px;padding:16px}.detail-head{display:flex;align-items:center;gap:10px;margin-bottom:13px}.detail-icon{width:40px;height:40px;border-radius:12px;background:#13253b;border:1px solid #2c4a64;display:grid;place-items:center;color:var(--cyan);font-size:19px}.detail h2{font-size:14px;margin:0}.detail-head p{font-size:11px;color:var(--muted);margin:3px 0 0}.description{font-size:12px;color:#a8b9d0;margin:0 0 14px}.stats{display:grid;grid-template-columns:1fr 1fr;gap:8px}.stat{background:#101d30;border:1px solid #24364f;padding:10px;border-radius:10px}.stat span{font-size:10px;color:var(--muted);display:block}.stat strong{display:block;font-size:13px;margin-top:4px}.detail-actions{display:flex;gap:7px;margin-top:14px}.detail-actions .btn{flex:1;font-size:11px}.controls{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:7px;padding:8px;background:#091326e8;border:1px solid #293a54;border-radius:14px;backdrop-filter:blur(18px);box-shadow:0 12px 40px #0006}.ctl{border:1px solid #344761;background:#122038;color:#e0ecff;border-radius:9px;padding:9px 12px;min-width:39px}.ctl:hover{border-color:#6d91bd;background:#1a2d48}.ctl.on{color:var(--cyan);border-color:#3a7287}.divider{width:1px;height:24px;background:#2c3d55}.hint{position:fixed;left:50%;bottom:80px;transform:translateX(-50%);border:1px solid #263a54;background:#091326a8;color:#91a5c2;padding:7px 12px;border-radius:99px;font-size:10px;white-space:nowrap;pointer-events:none}.status{position:fixed;right:22px;bottom:28px;color:#8296b2;font-size:10px;display:flex;align-items:center;gap:7px}.status i{width:6px;height:6px;background:var(--green);border-radius:50%;box-shadow:0 0 8px var(--green)}.crosshair{position:fixed;left:50%;top:50%;width:8px;height:8px;border:1px solid #70cfe777;border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;opacity:.25}
+@media(max-width:850px){.locations{width:230px}.detail{width:220px}.status{display:none}}
+@media(max-width:620px){.top{left:10px;right:10px;top:10px}.brand h1{font-size:14px}.brand p{display:none}.logo{width:36px;height:36px}.actions .btn{font-size:10px;padding:8px}.locations{left:8px;top:auto;bottom:75px;width:calc(50% - 12px);height:180px;max-height:31vh}.head{padding:10px}.head h2{font-size:12px;margin:4px 0}.head .muted{display:none}.list{padding:5px}.place{gap:6px;padding:7px 5px}.place-copy strong{font-size:10px}.place-copy span,.coord,.foot{display:none}.detail{right:8px;top:auto;bottom:75px;width:calc(50% - 12px);max-height:31vh;overflow:auto;padding:10px}.detail-head{gap:7px;margin-bottom:8px}.detail-icon{width:30px;height:30px;font-size:14px}.detail h2{font-size:11px}.description{font-size:10px;margin-bottom:8px}.stat{padding:7px}.stat strong{font-size:11px}.detail-actions{margin-top:8px;gap:5px}.detail-actions .btn{padding:7px 5px;font-size:10px}.controls{bottom:10px;padding:5px;gap:4px}.ctl{padding:7px 8px;min-width:32px;font-size:11px}.hint{display:none}.crosshair{display:none}}
+@media(prefers-reduced-motion:reduce){button{transition:none}}
+</style>
+</head>
+<body>
+<canvas id="scene" aria-label="Interactive 3D-style rotating globe"></canvas><div class="backdrop"></div>
+<header class="top"><div class="brand"><div class="logo">◎</div><div><h1>ATLAS</h1><p>GLOBAL LOCATION EXPLORER</p></div></div><div class="actions"><button class="btn" id="reset">↺ Reset globe</button><button class="btn primary" id="toggleTop">Ⅱ Pause rotation</button></div></header>
+<aside class="panel locations"><div class="head"><div class="eyebrow">Explore the planet</div><h2>Featured locations</h2><div class="muted" id="placeCount">8 destinations · click to focus</div></div><div class="list" id="places"></div><div class="foot"><i class="pulse"></i><span>Atmosphere online · local demo data</span></div></aside>
+<aside class="panel detail"><div class="detail-head"><div class="detail-icon">⌖</div><div><h2 id="placeName">Earth</h2><p id="placeRegion">Select a location</p></div></div><p class="description" id="placeDesc">Drag the globe to explore. Select a featured destination to smoothly focus the view.</p><div class="stats"><div class="stat"><span>Latitude</span><strong id="lat">—</strong></div><div class="stat"><span>Longitude</span><strong id="lon">—</strong></div></div><div class="detail-actions"><button class="btn" id="focus">◎ Focus location</button><button class="btn" id="home">⌂ Home view</button></div></aside>
+<div class="crosshair"></div><div class="hint">Drag to spin · click a glowing marker to focus · scroll to zoom</div>
+<div class="controls"><button class="ctl" id="zoomOut" aria-label="Zoom out">−</button><button class="ctl" id="zoomIn" aria-label="Zoom in">＋</button><div class="divider"></div><button class="ctl on" id="toggle" aria-label="Pause auto rotation">Ⅱ Auto-rotate</button><button class="ctl" id="next">Next marker ↗</button></div>
+<div class="status"><i></i><span id="status">AUTO-ROTATE ACTIVE</span></div>
+<script>
+(()=>{'use strict';
+const $=id=>document.getElementById(id),canvas=$('scene'),ctx=canvas.getContext('2d',{alpha:false});
+const locations=[
+{id:'DEL',name:'New Delhi',region:'Asia · India',lat:28.6139,lon:77.209,desc:'A major South Asian hub for technology, culture, trade and government.',color:'#70f0ff'},
+{id:'LON',name:'London',region:'Europe · United Kingdom',lat:51.5072,lon:-.1276,desc:'A global centre for finance, creative industries and international connections.',color:'#83a7ff'},
+{id:'NYC',name:'New York',region:'North America · United States',lat:40.7128,lon:-74.006,desc:'A world city with extensive links across finance, media, culture and commerce.',color:'#bba0ff'},
+{id:'TYO',name:'Tokyo',region:'Asia · Japan',lat:35.6762,lon:139.6503,desc:'A leading centre for technology, design, manufacturing and urban innovation.',color:'#7ff0cb'},
+{id:'DXB',name:'Dubai',region:'Middle East · UAE',lat:25.2048,lon:55.2708,desc:'An international crossroads for logistics, trade, tourism and business.',color:'#ffc77c'},
+{id:'SIN',name:'Singapore',region:'Asia · Singapore',lat:1.3521,lon:103.8198,desc:'A strategic port and regional centre for supply chains, finance and technology.',color:'#79e9ff'},
+{id:'SAO',name:'São Paulo',region:'South America · Brazil',lat:-23.5505,lon:-46.6333,desc:'A major Latin American centre for business, manufacturing and culture.',color:'#ff9fc8'},
+{id:'SYD',name:'Sydney',region:'Oceania · Australia',lat:-33.8688,lon:151.2093,desc:'A coastal global city connecting Australia with the wider Asia-Pacific region.',color:'#83e5ff'}];
+let W=innerWidth,H=innerHeight,dpr=1,rotation=-.25,tilt=-.12,zoom=1,auto=true,selected='DEL',drag=null,lastTime=0,focusAnim=null,hover=null;
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),rad=d=>d*Math.PI/180;
+function resize(){dpr=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;canvas.width=Math.round(W*dpr);canvas.height=Math.round(H*dpr);canvas.style.width=W+'px';canvas.style.height=H+'px';draw()}
+function sphere(){const side=Math.min(W*.31,H*.39)*zoom;return {x:W*.52,y:H*.5,r:clamp(side,110,Math.min(W,H)*.46)}}
+function project(lat,lon){const la=rad(lat),lo=rad(lon)+rotation;const x=Math.cos(la)*Math.sin(lo),y=Math.sin(la)*Math.cos(tilt)-Math.cos(la)*Math.cos(lo)*Math.sin(tilt),z=Math.sin(la)*Math.sin(tilt)+Math.cos(la)*Math.cos(lo)*Math.cos(tilt);return{x,y,z}}
+function screenPoint(p,s){return{x:s.x+p.x*s.r,y:s.y-p.y*s.r}}
+function focusLoc(loc){selected=loc.id;renderPlaces();updateDetail();const p=project(loc.lat,loc.lon);const targetRot=rotation-rad(loc.lon)-Math.PI/2;let delta=((targetRot-rotation+Math.PI*3)%(Math.PI*2))-Math.PI;focusAnim={start:performance.now(),duration:850,fromR:rotation,toR:rotation+delta,fromT:tilt,toT:clamp(-rad(loc.lat)*.45,-.55,.55)};auto=false;updateControls()}
+function draw(){
+ ctx.setTransform(dpr,0,0,dpr,0,0);ctx.fillStyle='#050a16';ctx.fillRect(0,0,W,H);
+ // Distant stars
+ for(let i=0;i<110;i++){const x=(i*7919%997)/997*W,y=(i*3571%991)/991*H,a=.12+(i%5)*.045;ctx.fillStyle='rgba(170,207,255,'+a+')';ctx.fillRect(x,y,(i%9===0)?1.6:1,(i%9===0)?1.6:1)}
+ const s=sphere();
+ // outer atmospheric bloom
+ const aura=ctx.createRadialGradient(s.x,s.y,s.r*.72,s.x,s.y,s.r*1.34);aura.addColorStop(0,'#53caff00');aura.addColorStop(.72,'#36baff12');aura.addColorStop(.9,'#43d5ff20');aura.addColorStop(1,'#4b8fff00');ctx.fillStyle=aura;ctx.beginPath();ctx.arc(s.x,s.y,s.r*1.35,0,Math.PI*2);ctx.fill();
+ ctx.save();ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.clip();
+ const ocean=ctx.createRadialGradient(s.x-s.r*.32,s.y-s.r*.38,s.r*.04,s.x,s.y,s.r*1.15);ocean.addColorStop(0,'#1b5482');ocean.addColorStop(.5,'#0d2e53');ocean.addColorStop(1,'#030c20');ctx.fillStyle=ocean;ctx.fillRect(s.x-s.r,s.y-s.r,s.r*2,s.r*2);
+ // longitude/latitude mesh with visible-side depth shading
+ ctx.lineWidth=.65;for(let lat=-75;lat<=75;lat+=15){ctx.beginPath();let started=false;for(let lon=-180;lon<=180;lon+=3){const p=project(lat,lon);if(p.z<-.02){started=false;continue}const q=screenPoint(p,s);if(!started){ctx.moveTo(q.x,q.y);started=true}else ctx.lineTo(q.x,q.y)}ctx.strokeStyle='rgba(101,192,231,.15)';ctx.stroke()}
+ for(let lon=-180;lon<180;lon+=15){ctx.beginPath();let started=false;for(let lat=-90;lat<=90;lat+=3){const p=project(lat,lon);if(p.z<-.02){started=false;continue}const q=screenPoint(p,s);if(!started){ctx.moveTo(q.x,q.y);started=true}else ctx.lineTo(q.x,q.y)}ctx.strokeStyle='rgba(101,192,231,.13)';ctx.stroke()}
+ // Stylized continent silhouettes as soft glowing geographic clusters, mapped from rough coordinate outlines
+ const continents=[
+ [[-17,35],[-5,37],[12,32],[30,10],[20,-35],[4,-34],[-10,-5],[-17,14]],
+ [[-130,50],[-110,70],[-75,60],[-55,25],[-80,8],[-105,20],[-125,38]],
+ [[-80,10],[-50,5],[-35,-25],[-60,-55],[-75,-25]],
+ [[-10,70],[35,65],[80,55],[145,65],[170,45],[135,10],[100,0],[75,10],[55,35],[25,30],[5,45]],
+ [[112,-10],[155,-12],[150,-40],[118,-35]],
+ [[-50,80],[0,82],[-20,60]]];
+ for(const poly of continents){ctx.beginPath();let started=false;for(const [lon,lat] of poly){const p=project(lat,lon);const q=screenPoint(p,s);if(p.z<-.08){started=false;continue}if(!started){ctx.moveTo(q.x,q.y);started=true}else ctx.lineTo(q.x,q.y)}ctx.closePath();ctx.fillStyle='rgba(49,133,151,.38)';ctx.fill();ctx.strokeStyle='rgba(104,224,211,.24)';ctx.lineWidth=1;ctx.stroke()}
+ // soft lighting from upper-left
+ const light=ctx.createRadialGradient(s.x-s.r*.48,s.y-s.r*.53,s.r*.05,s.x-s.r*.15,s.y-s.r*.15,s.r*1.25);light.addColorStop(0,'#9deeff24');light.addColorStop(.55,'#7ac8ff0a');light.addColorStop(1,'#010615b8');ctx.fillStyle=light;ctx.fillRect(s.x-s.r,s.y-s.r,s.r*2,s.r*2);
+ // edge shade
+ const shade=ctx.createRadialGradient(s.x-s.r*.22,s.y-s.r*.3,s.r*.3,s.x,s.y,s.r*1.1);shade.addColorStop(.5,'#02071500');shade.addColorStop(1,'#010510d9');ctx.fillStyle=shade;ctx.fillRect(s.x-s.r,s.y-s.r,s.r*2,s.r*2);
+ ctx.restore();
+ // rim
+ ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.strokeStyle='#62dfff88';ctx.lineWidth=1.4;ctx.stroke();ctx.beginPath();ctx.arc(s.x,s.y,s.r*1.018,0,Math.PI*2);ctx.strokeStyle='#3c9bff24';ctx.lineWidth=5;ctx.stroke();
+ // locations with back side subdued and front side glowing
+ const projected=locations.map(l=>({l,p:project(l.lat,l.lon)})).sort((a,b)=>a.p.z-b.p.z);
+ for(const {l,p} of projected){const q=screenPoint(p,s),front=p.z>0,sel=l.id===selected;ctx.globalAlpha=front?1:.22;
+ if(front){const glow=ctx.createRadialGradient(q.x,q.y,1,q.x,q.y,sel?25:17);glow.addColorStop(0,l.color+'88');glow.addColorStop(1,l.color+'00');ctx.fillStyle=glow;ctx.beginPath();ctx.arc(q.x,q.y,sel?25:17,0,Math.PI*2);ctx.fill()}
+ ctx.beginPath();ctx.arc(q.x,q.y,sel?5.5:3.8,0,Math.PI*2);ctx.fillStyle=l.color;ctx.fill();ctx.strokeStyle='#e5fbff';ctx.lineWidth=1;ctx.stroke();
+ if(sel&&front){ctx.beginPath();ctx.arc(q.x,q.y,10+Math.sin(performance.now()/230)*2,0,Math.PI*2);ctx.strokeStyle=l.color+'bb';ctx.lineWidth=1;ctx.stroke()}
+ if(front&&(sel||hover===l.id)){ctx.font='600 11px system-ui';ctx.textAlign='left';ctx.textBaseline='middle';ctx.fillStyle='#eaf7ff';ctx.fillText(l.name,q.x+10,q.y-10)}
+ ctx.globalAlpha=1;
+ }
+ // subtle lens flare
+ const flare=ctx.createRadialGradient(s.x-s.r*.7,s.y-s.r*.72,0,s.x-s.r*.7,s.y-s.r*.72,s.r*.28);flare.addColorStop(0,'#b7f5ff12');flare.addColorStop(1,'#b7f5ff00');ctx.fillStyle=flare;ctx.fillRect(s.x-s.r,s.y-s.r,s.r*2,s.r*2);
+}
+function renderPlaces(){$('places').innerHTML=locations.map(l=>`<button class="place ${l.id===selected?'active':''}" data-id="${l.id}"><i class="pin" style="color:${l.color};background:${l.color}"></i><span class="place-copy"><strong>${l.name}</strong><span>${l.region}</span></span><span class="coord">${l.id}</span></button>`).join('')}
+function updateDetail(){const l=locations.find(x=>x.id===selected);if(!l)return;$('placeName').textContent=l.name;$('placeRegion').textContent=l.region;$('placeDesc').textContent=l.desc;$('lat').textContent=l.lat.toFixed(4)+'°';$('lon').textContent=l.lon.toFixed(4)+'°';$('placeCount').textContent=locations.length+' destinations · click to focus'}
+function updateControls(){$('toggle').textContent=auto?'Ⅱ Auto-rotate':'▶ Auto-rotate';$('toggle').classList.toggle('on',auto);$('toggleTop').textContent=auto?'Ⅱ Pause rotation':'▶ Resume rotation';$('status').textContent=auto?'AUTO-ROTATE ACTIVE':'ROTATION PAUSED'}
+function nearestMarker(x,y){const s=sphere();let best=null,bd=22;for(const l of locations){const p=project(l.lat,l.lon);if(p.z<.1)continue;const q=screenPoint(p,s),d=Math.hypot(q.x-x,q.y-y);if(d<bd){bd=d;best=l}}return best}
+function stopInteract(){auto=false;updateControls()}
+canvas.addEventListener('pointerdown',e=>{const r=canvas.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;canvas.setPointerCapture(e.pointerId);drag={x,y,px:x,py:y,moved:false,marker:nearestMarker(x,y)};stopInteract()});
+canvas.addEventListener('pointermove',e=>{const r=canvas.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;if(drag){const dx=x-drag.px,dy=y-drag.py;if(Math.abs(x-drag.x)+Math.abs(y-drag.y)>3)drag.moved=true;rotation+=dx*.006;tilt=clamp(tilt+dy*.004,-1.15,1.15);drag.px=x;drag.py=y;draw();return}const m=nearestMarker(x,y);hover=m?.id||null;canvas.style.cursor=m?'pointer':'grab';draw()});
+canvas.addEventListener('pointerup',()=>{if(!drag)return;if(!drag.moved&&drag.marker)focusLoc(drag.marker);drag=null});
+canvas.addEventListener('pointercancel',()=>drag=null);
+canvas.addEventListener('wheel',e=>{e.preventDefault();stopInteract();zoom=clamp(zoom*(e.deltaY<0?1.08:.92),.72,1.65);draw()},{passive:false});
+$('places').addEventListener('click',e=>{const b=e.target.closest('[data-id]');if(b)focusLoc(locations.find(l=>l.id===b.dataset.id))});
+$('focus').addEventListener('click',()=>focusLoc(locations.find(l=>l.id===selected)));
+$('home').addEventListener('click',()=>{focusAnim={start:performance.now(),duration:700,fromR:rotation,toR:-.25,fromT:tilt,toT:-.12};zoom=1;auto=true;updateControls()});
+function toggle(){auto=!auto;updateControls()}
+$('toggle').addEventListener('click',toggle);$('toggleTop').addEventListener('click',toggle);
+$('zoomIn').addEventListener('click',()=>{stopInteract();zoom=clamp(zoom*1.15,.72,1.65);draw()});$('zoomOut').addEventListener('click',()=>{stopInteract();zoom=clamp(zoom/1.15,.72,1.65);draw()});
+$('next').addEventListener('click',()=>{const i=locations.findIndex(l=>l.id===selected);focusLoc(locations[(i+1)%locations.length])});
+$('reset').addEventListener('click',()=>{rotation=-.25;tilt=-.12;zoom=1;auto=true;focusAnim=null;updateControls();draw()});
+function animate(now){const dt=Math.min(40,now-(lastTime||now));lastTime=now;if(auto&&!drag&&!focusAnim)rotation+=dt*.00013;if(focusAnim){const a=focusAnim,p=clamp((now-a.start)/a.duration,0,1),e=1-Math.pow(1-p,3);rotation=a.fromR+(a.toR-a.fromR)*e;tilt=a.fromT+(a.toT-a.fromT)*e;if(p>=1)focusAnim=null}draw();requestAnimationFrame(animate)}
+window.addEventListener('resize',resize);renderPlaces();updateDetail();resize();updateControls();requestAnimationFrame(animate);
+})();
+</script>
+</body>
+</html>
