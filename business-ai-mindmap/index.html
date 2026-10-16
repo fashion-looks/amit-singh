@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f8f9ff">
+<title>Businessman + Artificial Intelligence — Mind Map</title>
+<style>
+:root{--ink:#17213d;--muted:#61708b;--line:#d9e1f2;--lav:#dce5ff;--mint:#c8eee4;--bg:#f8faff;--blue:#5f78c9}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 10% 0%,#eef2ff,transparent 32%),var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}header{padding:24px clamp(16px,4vw,44px) 16px;border-bottom:1px solid var(--line);background:#ffffffc9}h1{font-size:clamp(1.6rem,4vw,2.5rem);line-height:1.1;margin:0 0 8px;letter-spacing:-.04em}.subtitle{margin:0;color:var(--muted)}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}button,input{font:inherit}button{border:1px solid #ccd5ea;background:#fff;color:var(--ink);padding:9px 13px;border-radius:11px;cursor:pointer;font-weight:700}button:hover{background:#eef3ff}button:focus-visible,input:focus-visible{outline:3px solid #7b9bff;outline-offset:2px}.primary{background:#263c7b;color:#fff;border-color:#263c7b}.primary:hover{background:#334c91}.search{flex:1;min-width:180px;border:1px solid #ccd5ea;border-radius:11px;padding:10px 12px;background:white;color:var(--ink)}main{padding:18px clamp(12px,3vw,32px) 35px;max-width:1500px;margin:auto}.stats{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}.stat{border:1px solid var(--line);background:#fff;border-radius:12px;padding:8px 12px;color:var(--muted);font-size:.86rem}.stat b{color:var(--ink)}.layout{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(260px,.65fr);gap:16px;align-items:start}.panel{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 8px 28px #23376b0a;overflow:hidden}.panelhead{padding:15px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:10px;align-items:center}.panelhead h2{font-size:1.05rem;margin:0}.map{padding:22px;min-height:500px;overflow:auto}.tree{list-style:none;padding:0;margin:0;min-width:340px}.tree ul{list-style:none;margin:8px 0 8px 20px;padding:0 0 0 19px;border-left:1px solid #b5c5eb}.tree li{position:relative;margin:8px 0}.tree ul>li:before{content:"";position:absolute;left:-19px;top:20px;width:19px;border-top:1px solid #b5c5eb}.node{display:inline-flex;align-items:center;gap:7px;max-width:100%;padding:9px 11px;border:1px solid #c9d6f3;background:var(--lav);border-radius:9px;text-align:left;color:#17213d;cursor:pointer;white-space:normal;line-height:1.3}.root>.node{font-weight:850;background:#d5d6ff;border-color:#b4b8fa;font-size:1.02rem}.branch>.node{font-weight:750}.leaf>.node{background:var(--mint);border-color:#b8e1d7;font-weight:500}.node .toggle{font-size:.8rem;color:#596ca6;flex-shrink:0}.node.selected{outline:2px solid var(--blue);outline-offset:2px}.node.hiddenmatch{opacity:.22}.node.searchmatch{border-color:#e5a33e;background:#fff0c9}.node-label{overflow-wrap:anywhere}.details{padding:18px}.details h3{margin:0 0 7px;font-size:1.25rem}.details p{color:var(--muted);margin:0 0 14px}.details label{display:block;font-weight:750;margin:14px 0 6px}.details textarea,.details input{width:100%;border:1px solid #d1dbee;border-radius:10px;padding:10px;background:#fbfcff;color:var(--ink)}.details textarea{min-height:100px;resize:vertical}.detail-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.detail-actions button{flex:1}.help{font-size:.85rem;color:var(--muted);padding:0 18px 18px}.empty{padding:20px;color:var(--muted)}.collapsed>ul{display:none}.filtered-out{display:none!important}.footer{margin-top:15px;color:var(--muted);font-size:.85rem}.notice{padding:12px 14px;background:#f0f5ff;border-radius:12px;color:#445778;margin-top:12px;font-size:.9rem}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.map{min-height:360px;padding:15px}.tree{min-width:300px}.details{padding:16px}}
+@media(max-width:520px){header{padding:20px 14px 14px}.toolbar button{flex:1}.search{flex-basis:100%;order:-1}main{padding:12px 10px 25px}.panelhead{padding:12px 14px}.map{padding:12px;min-height:280px}.tree ul{margin-left:10px;padding-left:13px}.tree ul>li:before{left:-13px;width:13px}.node{padding:8px 9px;font-size:.88rem}.details textarea{min-height:85px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header>
+<h1>Businessman + Artificial Intelligence</h1>
+<p class="subtitle">An editable mind map for strategy, AI, operations, finance, automation and long-term growth.</p>
+<div class="toolbar">
+<input class="search" id="search" type="search" placeholder="Search topics… (e.g. CRM, GOTS, AI)" aria-label="Search mind map topics">
+<button id="expand">Expand all</button><button id="collapse">Collapse all</button><button id="reset">Reset</button><button class="primary" id="export">Export JSON</button>
+</div>
+</header>
+<main>
+<div class="stats"><div class="stat">Topics: <b id="count">0</b></div><div class="stat">Visible: <b id="visible">0</b></div><div class="stat">Selected: <b id="selectedText">Businessman + Artificial Intelligence</b></div></div>
+<div class="layout">
+<section class="panel">
+<div class="panelhead"><h2>Interactive mind map</h2><span class="stat">Tap a node to edit</span></div>
+<div class="map" id="map" aria-label="Mind map tree"></div>
+<div class="help">Tip: Select any topic to edit its title and notes. Use the search box to find branches. Changes stay in this browser using local storage.</div>
+</section>
+<aside class="panel">
+<div class="panelhead"><h2>Topic editor</h2><button id="addChild">＋ Add child</button></div>
+<div class="details" id="details">
+<h3>Businessman + Artificial Intelligence</h3><p>Select a topic in the mind map to edit it.</p>
+</div>
+</aside>
+</div>
+<div class="notice">This is a planning tool, not financial or business advice. Keep sensitive business information out of shared devices.</div>
+<div class="footer">Standalone HTML • Responsive on phones, tablets and desktop • No external libraries or server required</div>
+</main>
+<script>
+(function(){
+const STORAGE='business-ai-mindmap-v1';
+const starter={id:'root',title:'Businessman + Artificial Intelligence',notes:'A practical operating map for building a technology-enabled business.',children:[
+{id:'strategy',title:'Business Strategy',notes:'Set direction, positioning, and execution priorities.',children:[{id:'vision',title:'Vision & Mission'},{id:'advantage',title:'Competitive Advantage'},{id:'swot',title:'SWOT Analysis'},{id:'execution',title:'Strategic Execution'}]},
+{id:'ai',title:'AI Technologies',children:[{id:'genai',title:'Generative AI'},{id:'ml',title:'Machine Learning'},{id:'visionai',title:'Computer Vision'},{id:'nlp',title:'NLP'},{id:'agents',title:'AI Agents'}]},
+{id:'sales',title:'Sales & Marketing',children:[{id:'leads',title:'Lead Generation'},{id:'crm',title:'CRM & Customer Success'},{id:'social',title:'Digital & Social Media'},{id:'seo',title:'SEO & Email Marketing'},{id:'ecom',title:'E-commerce'}]},
+{id:'ops',title:'Operations & ERP',children:[{id:'supply',title:'Supply Chain Management'},{id:'inventory',title:'Inventory & Production'},{id:'quality',title:'Quality Control'},{id:'trace',title:'Traceability'}]},
+{id:'finance',title:'Finance & Accounting',children:[{id:'profit',title:'Revenue & Profit'},{id:'cash',title:'Cash Flow Management'},{id:'budget',title:'Budgeting & Forecasting'},{id:'kpi',title:'KPI Dashboard'}]},
+{id:'bi',title:'Business Intelligence',children:[{id:'warehouse',title:'Data Warehouse'},{id:'powerbi',title:'Power BI & Apache Superset'},{id:'metabase',title:'Metabase'},{id:'predict',title:'Predictive Analytics'}]},
+{id:'automation',title:'Automation',children:[{id:'github',title:'GitHub Actions'},{id:'zapier',title:'Zapier & n8n'},{id:'apis',title:'APIs'},{id:'workflow',title:'Workflow Automation'}]},
+{id:'garment',title:'Garment & Textile Business',children:[{id:'trade',title:'Manufacturing & Trading'},{id:'export',title:'Export'},{id:'cert',title:'Certifications (GOTS, GRS, OCS, RCS)'},{id:'compliance',title:'Compliance'}]},
+{id:'growth',title:'Growth Roadmap (2026–2030)',children:[{id:'y2026',title:'2026: Setup & Market Research'},{id:'y2027',title:'2027: Team Building & Branding'},{id:'y2028',title:'2028: Expansion & New Products'},{id:'y2029',title:'2029: Multiple Locations & Automation'},{id:'y2030',title:'2030: Global Expansion & 100 Cr Goal'}]},
+{id:'ceo',title:'Personal CEO System',children:[{id:'daily',title:'Daily Goals & Time Management'},{id:'decision',title:'Decision Making'},{id:'fitness',title:'Fitness & Learning'},{id:'risk',title:'Risk Management & Cybersecurity'}]}
+]};
+let data=load(),selected='root',nextId=1;
+function load(){try{const raw=localStorage.getItem(STORAGE);return raw?JSON.parse(raw):structuredClone(starter)}catch(e){return structuredClone(starter)}}
+function save(){try{localStorage.setItem(STORAGE,JSON.stringify(data))}catch(e){}}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function find(id,node=data){if(node.id===id)return node;for(const c of node.children||[]){const x=find(id,c);if(x)return x}return null}
+function parentOf(id,node=data){for(const c of node.children||[]){if(c.id===id)return node;const x=parentOf(id,c);if(x)return x}return null}
+function total(n=data){return 1+(n.children||[]).reduce((s,c)=>s+total(c),0)}
+function visibleCount(){return document.querySelectorAll('#map .node:not(.filtered-out)').length}
+function render(){
+const q=document.getElementById('search').value.trim().toLowerCase();
+function build(n,depth){const kids=n.children||[],has=kids.length,match=(n.title+' '+(n.notes||'')).toLowerCase().includes(q);const childHtml=kids.map(c=>build(c,depth+1)).join('');const descendantMatch=childHtml.includes('searchmatch')||childHtml.includes('data-match="yes"');const keep=!q||match||descendantMatch;const isSelected=n.id===selected;const collapsed=n.collapsed===true;return '<li class="'+(collapsed?'collapsed ':'')+(keep?'':'filtered-out')+'" data-li="'+esc(n.id)+'"><button class="node '+(depth===0?'root ':has?'branch ':'leaf ')+(isSelected?'selected ':'')+(q&&match?'searchmatch ':'')+'" data-id="'+esc(n.id)+'" data-match="'+(match?'yes':'no')+'" aria-expanded="'+(!collapsed)+'"><span class="toggle">'+(has?(collapsed?'＋':'−'):'•')+'</span><span class="node-label">'+esc(n.title)+'</span></button>'+(has?'<ul>'+childHtml+'</ul>':'')+'</li>'}
+document.getElementById('map').innerHTML='<ul class="tree">'+build(data,0)+'</ul>';document.getElementById('count').textContent=total();document.getElementById('visible').textContent=visibleCount();document.getElementById('selectedText').textContent=(find(selected)||data).title;
+document.querySelectorAll('.node').forEach(b=>b.addEventListener('click',e=>{const id=b.dataset.id;const n=find(id);if(!n)return;if(e.target.classList.contains('toggle')&&(n.children||[]).length){n.collapsed=!n.collapsed;save();render();return}selected=id;render();editor()}));
+}
+function editor(){const n=find(selected)||data;const p=parentOf(n.id);document.getElementById('details').innerHTML='<h3>'+esc(n.title)+'</h3><p>'+(p?'Parent: '+esc(p.title):'Root topic')+'</p><label for="titleInput">Topic title</label><input id="titleInput" maxlength="140" value="'+esc(n.title)+'"><label for="notesInput">Notes / action ideas</label><textarea id="notesInput" placeholder="Add details, goals or next actions…">'+esc(n.notes||'')+'</textarea><div class="detail-actions"><button class="primary" id="saveNode">Save changes</button><button id="deleteNode" '+(n.id==='root'?'disabled':'')+'>Delete topic</button></div><p class="muted" style="font-size:.82rem;margin-top:12px">Edits are saved only in this browser until you export the JSON.</p>';
+document.getElementById('saveNode').addEventListener('click',()=>{n.title=document.getElementById('titleInput').value.trim()||n.title;n.notes=document.getElementById('notesInput').value;save();render();editor()});
+document.getElementById('deleteNode').addEventListener('click',()=>{if(n.id==='root')return;if(confirm('Delete “'+n.title+'” and its child topics?')){const p=parentOf(n.id);p.children=p.children.filter(c=>c.id!==n.id);selected=p.id;save();render();editor()}});
+}
+document.getElementById('addChild').addEventListener('click',()=>{const n=find(selected)||data;n.children=n.children||[];const id='custom-'+Date.now()+'-'+(nextId++);n.children.push({id,title:'New topic',notes:'',children:[]});n.collapsed=false;selected=id;save();render();editor();document.getElementById('titleInput').focus();document.getElementById('titleInput').select()});
+document.getElementById('search').addEventListener('input',render);
+document.getElementById('expand').addEventListener('click',()=>{function walk(n){n.collapsed=false;(n.children||[]).forEach(walk)}walk(data);save();render()});
+document.getElementById('collapse').addEventListener('click',()=>{function walk(n){if(n.children&&n.id!=='root')n.collapsed=true;(n.children||[]).forEach(walk)}walk(data);data.collapsed=false;save();render()});
+document.getElementById('reset').addEventListener('click',()=>{if(confirm('Reset the map to the original example? This removes your local edits.')){data=structuredClone(starter);selected='root';save();render();editor()}});
+document.getElementById('export').addEventListener('click',()=>{const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='business-ai-mindmap.json';a.click();URL.revokeObjectURL(url)});
+render();editor();
+})();
+</script>
+</body>
+</html>
