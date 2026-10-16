@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0c1830">
+<title>Personal CEO System | Daily Command Center</title>
+<style>
+:root{--bg:#0a1428;--panel:#121f3b;--panel2:#192b4c;--ink:#f5f7ff;--muted:#aab8d2;--line:#ffffff20;--blue:#a8c3ff;--mint:#a5ead7;--gold:#ffd28b;--red:#ffb3bd}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 90% 0%,#263e70 0,transparent 34%),var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}header,main,footer{width:min(1180px,calc(100% - 32px));margin:auto}header{padding:34px 0 22px}.eyebrow{color:var(--mint);font-weight:800;text-transform:uppercase;letter-spacing:.16em;font-size:.74rem}h1{font-size:clamp(2.2rem,6vw,4.3rem);line-height:1;letter-spacing:-.055em;margin:12px 0}.sub{color:var(--muted);max-width:720px;font-size:1.05rem}.topbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:18px}.date{border:1px solid var(--line);background:#ffffff08;color:var(--ink);border-radius:10px;padding:9px 11px}.btn{border:1px solid var(--line);background:#ffffff0b;color:var(--ink);border-radius:11px;padding:10px 13px;font:inherit;font-weight:750;cursor:pointer}.btn:hover{background:#ffffff18}.primary{background:var(--blue);color:#111b33;border-color:var(--blue)}.danger{color:var(--red)}button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid var(--mint);outline-offset:2px}.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:15px;padding-bottom:20px}.card{grid-column:span 6;background:linear-gradient(145deg,#172746ed,#101c35);border:1px solid var(--line);border-radius:19px;padding:20px;min-width:0;box-shadow:0 14px 40px #0002}.wide{grid-column:span 12}.third{grid-column:span 4}.cardhead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}.cardhead h2{font-size:1.22rem;margin:0}.kicker{font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;color:var(--blue);font-weight:850}.muted{color:var(--muted)}.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:15px 0}.metric{border:1px solid var(--line);border-radius:13px;padding:12px;background:#ffffff05}.metric b{display:block;font-size:1.55rem;letter-spacing:-.04em}.metric span{font-size:.78rem;color:var(--muted)}.progress{height:8px;background:#ffffff20;border-radius:99px;overflow:hidden;margin:12px 0}.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--mint));transition:width .2s}.tasklist{display:grid;gap:8px}.task{display:flex;align-items:flex-start;gap:10px;border:1px solid var(--line);border-radius:12px;padding:11px;background:#ffffff04}.task input{accent-color:var(--mint);width:18px;height:18px;flex-shrink:0;margin-top:3px}.task label{flex:1;min-width:0;cursor:pointer}.task small{display:block;color:var(--muted)}.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px}.field{width:100%;padding:10px 11px;border:1px solid var(--line);border-radius:10px;background:#0b1730;color:var(--ink);font:inherit}.field::placeholder{color:#8c9bb8}textarea.field{min-height:82px;resize:vertical}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.formgrid .full{grid-column:span 2}.decision{border:1px solid var(--line);padding:12px;border-radius:12px;margin:9px 0}.decision b{display:block}.badge{display:inline-block;border:1px solid var(--line);border-radius:99px;padding:3px 8px;font-size:.73rem;color:var(--mint)}.list{display:grid;gap:8px;margin-top:12px}.entry{border:1px solid var(--line);border-radius:12px;padding:12px;overflow-wrap:anywhere}.entry strong{display:block}.entry p{margin:5px 0;color:var(--muted);white-space:pre-wrap}.entry button{margin-top:7px}.empty{color:var(--muted);padding:14px;border:1px dashed var(--line);border-radius:12px}.notice{border:1px solid #8da9e54a;background:#b9d0ff0b;color:#d7e3ff;padding:13px;border-radius:13px;font-size:.88rem}.checkrow{display:flex;gap:10px;align-items:flex-start;margin:12px 0}.checkrow input{accent-color:var(--mint);width:18px;height:18px;margin-top:3px}.small{font-size:.83rem}footer{padding:10px 0 35px;color:var(--muted);font-size:.82rem}
+@media(max-width:850px){.third{grid-column:span 6}.card{padding:17px}.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){header,main,footer{width:calc(100% - 22px)}header{padding-top:25px}.card,.third{grid-column:span 12}.grid{gap:11px}.card{padding:15px;border-radius:16px}.metrics{gap:7px}.metric{padding:10px}.metric b{font-size:1.35rem}.formgrid{grid-template-columns:1fr}.formgrid .full{grid-column:span 1}.btn{min-height:43px}.topbar .btn{flex:1}.date{width:100%}.cardhead h2{font-size:1.12rem}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header>
+<div class="eyebrow">Personal CEO System • Daily Command Center</div>
+<h1>Lead yourself.<br><span style="color:var(--blue)">Build with intention.</span></h1>
+<p class="sub">A practical dashboard for daily goals, clear decisions, healthy routines and cybersecurity basics. Your entries stay in this browser unless you export them.</p>
+<div class="topbar"><input class="date" id="day" type="date" aria-label="Dashboard date"><button class="btn" id="today">Today</button><button class="btn primary" id="export">Export backup</button><button class="btn" id="importBtn">Import backup</button><input id="importFile" type="file" accept="application/json" hidden></div>
+</header>
+<main>
+<section class="metrics">
+<div class="metric"><b id="doneMetric">0/6</b><span>Daily habits</span></div><div class="metric"><b id="scoreMetric">0%</b><span>Completion</span></div><div class="metric"><b id="decisionMetric">0</b><span>Decisions logged</span></div><div class="metric"><b id="streakMetric">0</b><span>Habit streak days</span></div>
+</section>
+<div class="progress"><span id="overallProgress"></span></div>
+<section class="grid">
+<article class="card wide">
+<div class="cardhead"><div><div class="kicker">01 / Daily execution</div><h2>Today's goals & habits</h2></div><span class="badge" id="habitBadge">0 of 6 complete</span></div>
+<p class="muted">Use this checklist as a flexible guide, not a measure of personal worth. Adjust habits to fit your real schedule.</p>
+<div class="tasklist" id="habits"></div>
+<div class="row"><input id="newHabit" class="field" style="flex:1;min-width:180px" maxlength="100" placeholder="Add a custom daily habit"><button class="btn primary" id="addHabit">Add habit</button></div>
+</article>
+<article class="card">
+<div class="cardhead"><div><div class="kicker">02 / Decision quality</div><h2>Decision journal</h2></div><span class="badge">Think clearly</span></div>
+<div class="formgrid">
+<div class="full"><label for="decisionTitle">Decision to make</label><input id="decisionTitle" class="field" maxlength="160" placeholder="What needs a decision?"></div>
+<div class="full"><label for="decisionOptions">Options & trade-offs</label><textarea id="decisionOptions" class="field" placeholder="Option A / Option B, benefits, costs, risks…"></textarea></div>
+<div><label for="decisionDate">Review date</label><input id="decisionDate" type="date" class="field"></div>
+<div><label for="confidence">Confidence</label><select id="confidence" class="field"><option>Low</option><option selected>Medium</option><option>High</option></select></div>
+<div class="full"><label for="decisionNext">Next small action</label><input id="decisionNext" class="field" maxlength="160" placeholder="What is the next reversible step?"></div>
+</div>
+<div class="row"><button class="btn primary" id="saveDecision">Save decision</button></div><div class="list" id="decisions"></div>
+</article>
+<article class="card">
+<div class="cardhead"><div><div class="kicker">03 / Wellbeing</div><h2>Fitness & learning</h2></div><span class="badge">Sustainable progress</span></div>
+<p class="muted small">Track consistency and energy rather than chasing extreme targets.</p>
+<div class="formgrid">
+<div><label for="sleep">Sleep (hours)</label><input id="sleep" class="field" type="number" min="0" max="24" step=".5" placeholder="e.g. 8"></div>
+<div><label for="movement">Movement (minutes)</label><input id="movement" class="field" type="number" min="0" max="1440" placeholder="e.g. 30"></div>
+<div><label for="energy">Energy today</label><select id="energy" class="field"><option value="">Choose…</option><option>Low</option><option>Moderate</option><option>Good</option></select></div>
+<div><label for="learning">Learning (minutes)</label><input id="learning" class="field" type="number" min="0" max="1440" placeholder="e.g. 20"></div>
+<div class="full"><label for="wellbeingNote">Notes / tomorrow's adjustment</label><textarea id="wellbeingNote" class="field" placeholder="What helped? What would make tomorrow easier?"></textarea></div>
+</div>
+<div class="row"><button class="btn primary" id="saveWellbeing">Save daily log</button></div><div class="list" id="wellbeingHistory"></div>
+</article>
+<article class="card">
+<div class="cardhead"><div><div class="kicker">04 / Digital safety</div><h2>Cybersecurity checklist</h2></div><span class="badge">Monthly review</span></div>
+<p class="muted small">Mark controls you have actually checked. Never store passwords, recovery codes or secret keys in this dashboard.</p>
+<div class="tasklist" id="security"></div>
+<div class="row"><button class="btn" id="resetSecurity">Reset checklist</button></div>
+<div class="notice" style="margin-top:13px">Use a password manager, unique passwords, multifactor authentication, device updates, encrypted backups and caution with unexpected links. Do not share one-time codes.</div>
+</article>
+<article class="card">
+<div class="cardhead"><div><div class="kicker">05 / CEO notes</div><h2>Daily reflection</h2></div></div>
+<label for="win">One meaningful win</label><textarea id="win" class="field" placeholder="What moved forward today?"></textarea>
+<label for="priority" style="display:block;margin-top:12px">Tomorrow's top priority</label><input id="priority" class="field" maxlength="180" placeholder="The one thing that matters most">
+<label for="blocker" style="display:block;margin-top:12px">Blocker to address</label><textarea id="blocker" class="field" placeholder="What is in the way, and what is one useful next step?"></textarea>
+<div class="row"><button class="btn primary" id="saveReflection">Save reflection</button></div><p class="muted small" id="reflectionStatus" aria-live="polite"></p>
+</article>
+<article class="card">
+<div class="cardhead"><div><div class="kicker">06 / Data control</div><h2>Your information</h2></div></div>
+<p class="muted">This app uses browser local storage for saved entries. It does not send them to a server. Clearing browser data may erase them, so export a backup if you need one.</p>
+<label class="checkrow"><input id="privacyConfirm" type="checkbox"><span>I understand that this dashboard is not a secure password vault and I should export backups carefully.</span></label>
+<div class="row"><button class="btn danger" id="clearData">Clear all local data</button></div>
+<p class="muted small">Only clear data after exporting anything you want to keep.</p>
+</article>
+</section>
+</main>
+<footer>Personal CEO System • Standalone responsive web app • No external libraries • Use as a planning aid, not a substitute for professional medical, financial or security advice.</footer>
+<script>
+(function(){
+const KEY='personal-ceo-system-v1';
+const defaultHabits=[{id:'focus',label:'Set top 3 priorities'},{id:'movement',label:'Move or exercise at a comfortable level'},{id:'learn',label:'Learn or practice a skill'},{id:'money',label:'Review important money / business numbers'},{id:'connect',label:'Make one useful, respectful connection'},{id:'shutdown',label:'Plan tomorrow and wind down'}];
+const defaultSecurity=[{id:'mfa',label:'Multifactor authentication enabled on important accounts'},{id:'passwords',label:'Unique passwords stored in a password manager'},{id:'updates',label:'Phone, computer and browser updates checked'},{id:'backup',label:'Important files backed up securely'},{id:'links',label:'Unexpected links and attachments treated cautiously'},{id:'recovery',label:'Account recovery options reviewed'}];
+const blank=()=>({habits:defaultHabits.map(x=>({...x})),daily:{},decisions:[],wellbeing:{},security:{},reflections:{}});
+let state=load();
+function load(){try{return JSON.parse(localStorage.getItem(KEY))||blank()}catch(e){return blank()}}
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){alert('Browser storage is unavailable or full. Export a backup if possible.')}}
+function dateKey(){return document.getElementById('day').value||new Date().toLocaleDateString('en-CA')}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function dayData(k=dateKey()){state.daily[k]=state.daily[k]||{};return state.daily[k]}
+function renderHabits(){const d=dayData();document.getElementById('habits').innerHTML=state.habits.map(h=>'<div class="task"><input type="checkbox" id="h-'+esc(h.id)+'" data-habit="'+esc(h.id)+'" '+(d[h.id]?'checked':'')+'><label for="h-'+esc(h.id)+'">'+esc(h.label)+(h.custom?'<small>Custom habit</small>':'')+'</label>'+(h.custom?'<button class="btn danger" data-remove-habit="'+esc(h.id)+'" aria-label="Remove habit">×</button>':'')+'</div>').join('')||'<div class="empty">No habits yet. Add one above.</div>';
+document.querySelectorAll('[data-habit]').forEach(el=>el.addEventListener('change',()=>{dayData()[el.dataset.habit]=el.checked;persist();renderAll()}));
+document.querySelectorAll('[data-remove-habit]').forEach(el=>el.addEventListener('click',()=>{state.habits=state.habits.filter(h=>h.id!==el.dataset.removeHabit);persist();renderAll()}));
+const done=state.habits.filter(h=>d[h.id]).length,total=state.habits.length;document.getElementById('habitBadge').textContent=done+' of '+total+' complete';document.getElementById('doneMetric').textContent=done+'/'+total;document.getElementById('scoreMetric').textContent=(total?Math.round(done/total*100):0)+'%';document.getElementById('overallProgress').style.width=(total?done/total*100:0)+'%';}
+function renderSecurity(){document.getElementById('security').innerHTML=defaultSecurity.map(s=>'<div class="task"><input type="checkbox" id="s-'+s.id+'" data-security="'+s.id+'" '+(state.security[s.id]?'checked':'')+'><label for="s-'+s.id+'">'+esc(s.label)+'</label></div>').join('');document.querySelectorAll('[data-security]').forEach(el=>el.addEventListener('change',()=>{state.security[el.dataset.security]=el.checked;persist()}))}
+function renderDecisions(){document.getElementById('decisions').innerHTML=state.decisions.length?state.decisions.slice().reverse().map(d=>'<div class="entry"><strong>'+esc(d.title)+'</strong><p>'+esc(d.options)+'</p><p><b>Next:</b> '+esc(d.next||'Not set')+' • Confidence: '+esc(d.confidence)+' • Review: '+esc(d.review||'Not set')+'</p><button class="btn danger" data-delete-decision="'+esc(d.id)+'">Delete</button></div>').join(''):'<div class="empty">Your decision journal entries will appear here.</div>';document.getElementById('decisionMetric').textContent=state.decisions.length;document.querySelectorAll('[data-delete-decision]').forEach(b=>b.addEventListener('click',()=>{state.decisions=state.decisions.filter(d=>d.id!==b.dataset.deleteDecision);persist();renderDecisions()}))}
+function renderWellbeing(){const item=state.wellbeing[dateKey()];document.getElementById('sleep').value=item?.sleep??'';document.getElementById('movement').value=item?.movement??'';document.getElementById('energy').value=item?.energy??'';document.getElementById('learning').value=item?.learning??'';document.getElementById('wellbeingNote').value=item?.note??'';const entries=Object.entries(state.wellbeing).sort((a,b)=>b[0].localeCompare(a[0])).slice(0,5);document.getElementById('wellbeingHistory').innerHTML=entries.length?entries.map(([date,v])=>'<div class="entry"><strong>'+esc(date)+'</strong><p>Sleep: '+esc(v.sleep||'—')+' h • Movement: '+esc(v.movement||'—')+' min • Learning: '+esc(v.learning||'—')+' min • Energy: '+esc(v.energy||'—')+'</p></div>').join(''):'<div class="empty">Saved daily logs appear here.</div>'}
+function renderReflection(){const v=state.reflections[dateKey()]||{};document.getElementById('win').value=v.win||'';document.getElementById('priority').value=v.priority||'';document.getElementById('blocker').value=v.blocker||'';document.getElementById('reflectionStatus').textContent=v.saved?'Saved for '+dateKey()+'.':''}
+function streak(){let n=0,d=new Date(dateKey()+'T12:00:00');for(let i=0;i<365;i++){const k=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');const entry=state.daily[k]||{};if(!state.habits.length||state.habits.some(h=>!entry[h.id]))break;n++;d.setDate(d.getDate()-1)}document.getElementById('streakMetric').textContent=n}
+function renderAll(){renderHabits();renderSecurity();renderDecisions();renderWellbeing();renderReflection();streak()}
+document.getElementById('day').value=new Date().toLocaleDateString('en-CA');
+document.getElementById('today').addEventListener('click',()=>{document.getElementById('day').value=new Date().toLocaleDateString('en-CA');renderAll()});
+document.getElementById('day').addEventListener('change',renderAll);
+document.getElementById('addHabit').addEventListener('click',()=>{const input=document.getElementById('newHabit'),label=input.value.trim();if(!label)return;state.habits.push({id:'custom-'+Date.now(),label,custom:true});input.value='';persist();renderAll()});
+document.getElementById('saveDecision').addEventListener('click',()=>{const title=document.getElementById('decisionTitle').value.trim();if(!title){alert('Please enter a decision title.');return}state.decisions.push({id:String(Date.now()),title,options:document.getElementById('decisionOptions').value.trim(),review:document.getElementById('decisionDate').value,confidence:document.getElementById('confidence').value,next:document.getElementById('decisionNext').value.trim()});['decisionTitle','decisionOptions','decisionDate','decisionNext'].forEach(id=>document.getElementById(id).value='');persist();renderDecisions()});
+document.getElementById('saveWellbeing').addEventListener('click',()=>{const num=id=>{const v=document.getElementById(id).value;return v===''?'':Number(v)};state.wellbeing[dateKey()]={sleep:num('sleep'),movement:num('movement'),energy:document.getElementById('energy').value,learning:num('learning'),note:document.getElementById('wellbeingNote').value};persist();renderWellbeing()});
+document.getElementById('saveReflection').addEventListener('click',()=>{state.reflections[dateKey()]={win:document.getElementById('win').value,priority:document.getElementById('priority').value,blocker:document.getElementById('blocker').value,saved:true};persist();renderReflection()});
+document.getElementById('resetSecurity').addEventListener('click',()=>{if(confirm('Uncheck all cybersecurity items?')){state.security={};persist();renderSecurity()}});
+document.getElementById('export').addEventListener('click',()=>{const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='personal-ceo-system-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)});
+document.getElementById('importBtn').addEventListener('click',()=>document.getElementById('importFile').click());
+document.getElementById('importFile').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;try{const parsed=JSON.parse(await f.text());if(!parsed||!Array.isArray(parsed.habits)||!parsed.daily)throw Error('Invalid backup format');state=parsed;persist();renderAll();alert('Backup imported.')}catch(err){alert('Could not import this file. Please choose a valid Personal CEO System JSON backup.')}e.target.value=''});
+document.getElementById('clearData').addEventListener('click',()=>{if(!document.getElementById('privacyConfirm').checked){alert('Please confirm you understand the data warning first.');return}if(confirm('Permanently clear this dashboard data from this browser? Export a backup first if needed.')){state=blank();persist();renderAll()}});
+renderAll();
+})();</script>
+</body></html>
