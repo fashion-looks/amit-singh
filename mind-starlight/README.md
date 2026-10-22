@@ -1,26 +1,23 @@
 # Mind-to-Starlight: EEG-ready Galaxy Controller
 
-A real, runnable prototype for controlling an animated galaxy with a **manual focus input today**, with a clearly separated adapter point for future EEG hardware integration.
+A runnable prototype that maps a manual focus slider to a simulated galaxy visualizer. No EEG headset is connected in this version.
 
-## What works now
+## Automation included
 
-- Responsive browser-based animated galaxy visualizer.
-- Manual focus slider that changes galaxy motion/glow.
-- Browser microphone/voice commands are optional enhancement? (not required for the main demo).
-- Flask backend and NASA APOD endpoint remain available in `app.py`.
-- No EEG hardware is required to try the visualizer.
-
-## What does not work yet
-
-Because no EEG headset is available, the app cannot read brainwaves today. The focus slider is explicitly a **simulation**, not a physiological measurement. To use live brain signals, choose a specific EEG headset, install its supported SDK/streaming tool, and implement the vendor-specific adapter. This project does not claim that thought can physically control stars, Earth, or the universe.
+- CI when files under `mind-starlight/**` change: Python syntax checks, Flask route smoke tests, and a downloadable source artifact.
+- Daily scheduled maintenance checks at 03:17 UTC and manual `workflow_dispatch`.
+- Dependabot weekly updates for Python dependencies and GitHub Actions.
+- `/healthz` endpoint for hosting health checks and external uptime monitors.
+- `Procfile` for Gunicorn-based hosting.
 
 ## Run locally
 
 Requires Python 3.10+.
 
 ```bash
+cd mind-starlight
 python -m venv .venv
-# macOS/Linux
+# macOS/Linux:
 source .venv/bin/activate
 # Windows PowerShell: .venv\\Scripts\\Activate.ps1
 pip install -r requirements.txt
@@ -28,27 +25,31 @@ cp .env.example .env
 python app.py
 ```
 
-Open http://127.0.0.1:5000. The NASA panel calls the APOD API; `DEMO_KEY` is rate-limited. A NASA key is optional and can be put in your local `.env` file. Never commit a real key.
+Open http://127.0.0.1:5000.
 
-## Try the galaxy controller
+Production-style command:
+```bash
+gunicorn app:app --bind 0.0.0.0:8000
+```
 
-1. Open the page and find **Galaxy Control — Simulated Input**.
-2. Drag the focus slider from low to high and observe the glow and orbital speed change.
-3. Use the **Reset** button to return to the default settings.
-4. Optionally click **Load NASA astronomy image** to test the API integration.
+## Make it available 24/7
 
-## Future EEG connection
+GitHub Actions automates checks and maintenance; it does **not** host a web server continuously. To make this app available all day, deploy it to a Python web host or VPS. For a hosting provider connected to GitHub:
 
-Integrate this in three deliberate steps:
-1. Select the actual device and its supported SDK/stream protocol.
-2. Write a backend adapter that validates incoming numeric values and converts a measured, documented signal feature into a normalized control value.
-3. Replace the manual slider as the source of the control value only after device streaming has been tested. Keep a manual fallback and show the sensor connection state.
+1. Connect this repository.
+2. Set the service root directory to `mind-starlight`.
+3. Use start command `gunicorn app:app --bind 0.0.0.0:$PORT`.
+4. Optionally set `NASA_API_KEY` as a hosting environment variable. Without a key, `DEMO_KEY` is used and has strict rate limits.
+5. Configure an external uptime monitor to request `https://YOUR-HOST/healthz` after deployment.
 
-Do not invent a universal EEG interface: each device and SDK is different.
+Free-tier hosts may sleep, have usage limits, or cold starts; true uninterrupted service depends on the host plan. A health endpoint reports app status, not the availability of NASA.
 
-## Automated checks
+## Security
 
-GitHub Actions runs a Python syntax check and a basic Flask route smoke test on pushes and pull requests.
+- Keep your real API key in a host environment variable or a GitHub Actions secret; do not commit it.
+- GitHub Actions must be enabled in repository settings for scheduled workflows.
+- Scheduled workflows are best-effort and may be delayed by GitHub.
+- The focus slider is a simulation input, not a brain signal. Live EEG requires a chosen compatible headset and device-specific SDK or data stream integration.
 
 ## License
 
