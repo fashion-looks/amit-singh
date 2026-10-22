@@ -1,0 +1,58 @@
+name: Mind Starlight CI
+
+on:
+  push:
+    paths:
+      - "mind-starlight/**"
+  pull_request:
+    paths:
+      - "mind-starlight/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mind-starlight-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: mind-starlight
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: mind-starlight/requirements.txt
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Compile Python
+        run: python -m py_compile app.py
+      - name: Test Flask routes
+        run: |
+          python - <<'PY'
+          import app
+          client = app.app.test_client()
+          page = client.get("/")
+          assert page.status_code == 200
+          assert b"GALAXY VISUALIZER" in page.data
+          assert client.get("/healthz").status_code == 200
+          print("Flask route smoke tests passed.")
+          PY
+      - name: Build source bundle
+        run: |
+          mkdir -p dist
+          cp app.py requirements.txt README.md .env.example dist/
+          cd dist
+          zip -r ../mind-starlight-source.zip .
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mind-starlight-source
+          path: mind-starlight/mind-starlight-source.zip
+          if-no-files-found: error
+          retention-days: 14
