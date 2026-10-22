@@ -1,43 +1,54 @@
-# Mind ↔ Starlight — Space Data Demo
+# Mind-to-Starlight: EEG-ready Galaxy Controller
 
-A beginner-friendly demo matching the automatic flow:
+A real, runnable prototype for controlling an animated galaxy with a **manual focus input today**, with a clearly separated adapter point for future EEG hardware integration.
 
-**EEG device (optional) → Python processing → Internet/API → Space data → Visualization**
+## What works now
 
-## What works in this project
+- Responsive browser-based animated galaxy visualizer.
+- Manual focus slider that changes galaxy motion/glow.
+- Browser microphone/voice commands are optional enhancement? (not required for the main demo).
+- Flask backend and NASA APOD endpoint remain available in `app.py`.
+- No EEG hardware is required to try the visualizer.
 
-- Mobile-friendly animated starfield and responsive interface.
-- Manual focus slider as a **simulation input**.
-- Python/Flask backend fetching NASA Astronomy Picture of the Day (APOD).
-- GitHub Actions workflow for Python syntax and route smoke checks.
+## What does not work yet
 
-## Scientific limitations
-
-This demo does **not** read actual brainwaves, control Earth, stars or the universe. The focus slider is not an EEG signal. Actual EEG requires compatible hardware, its SDK, and device-specific integration. NASA APOD supplies astronomy content, not a real-time feed of every star.
+Because no EEG headset is available, the app cannot read brainwaves today. The focus slider is explicitly a **simulation**, not a physiological measurement. To use live brain signals, choose a specific EEG headset, install its supported SDK/streaming tool, and implement the vendor-specific adapter. This project does not claim that thought can physically control stars, Earth, or the universe.
 
 ## Run locally
 
-Requires Python 3.10 or later.
+Requires Python 3.10+.
 
 ```bash
 python -m venv .venv
 # macOS/Linux
 source .venv/bin/activate
-# Windows PowerShell
-# .venv\Scripts\Activate.ps1
+# Windows PowerShell: .venv\\Scripts\\Activate.ps1
 pip install -r requirements.txt
 cp .env.example .env
-# Optional: add your NASA API key to .env
 python app.py
 ```
 
-Open http://127.0.0.1:5000.
+Open http://127.0.0.1:5000. The NASA panel calls the APOD API; `DEMO_KEY` is rate-limited. A NASA key is optional and can be put in your local `.env` file. Never commit a real key.
 
-Get an optional key at https://api.nasa.gov/. Without a key, the app uses `DEMO_KEY`, which is rate-limited.
+## Try the galaxy controller
 
-## Secrets for GitHub Actions
+1. Open the page and find **Galaxy Control — Simulated Input**.
+2. Drag the focus slider from low to high and observe the glow and orbital speed change.
+3. Use the **Reset** button to return to the default settings.
+4. Optionally click **Load NASA astronomy image** to test the API integration.
 
-If adapting this project to use a private key in CI, add it in **Settings → Secrets and variables → Actions** as `NASA_API_KEY`. Never commit your real `.env` file or key.
+## Future EEG connection
+
+Integrate this in three deliberate steps:
+1. Select the actual device and its supported SDK/stream protocol.
+2. Write a backend adapter that validates incoming numeric values and converts a measured, documented signal feature into a normalized control value.
+3. Replace the manual slider as the source of the control value only after device streaming has been tested. Keep a manual fallback and show the sensor connection state.
+
+Do not invent a universal EEG interface: each device and SDK is different.
+
+## Automated checks
+
+GitHub Actions runs a Python syntax check and a basic Flask route smoke test on pushes and pull requests.
 
 ## License
 
