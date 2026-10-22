@@ -23,6 +23,7 @@ jobs:
           client = app.app.test_client()
           response = client.get("/")
           assert response.status_code == 200
-          assert b"AUTOMATIC CONNECTION FLOW" in response.data
+          assert b"GALAXY VISUALIZER" in response.data
+          assert b"GALAXY CONTROL" in response.data
           print("Route smoke test passed")
           PY
