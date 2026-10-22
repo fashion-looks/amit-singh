@@ -68,6 +68,11 @@ addEventListener('resize',fitGalaxy);fitGalaxy();drawGalaxy();
 def index():
     return render_template_string(HTML)
 
+
+@app.get("/healthz")
+def healthz():
+    return jsonify({"status": "ok", "service": "mind-starlight"}), 200
+
 @app.get("/api/apod")
 def apod():
     try:
@@ -86,4 +91,4 @@ def apod():
         return jsonify({"error": "NASA returned an unexpected response."}), 502
 
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=int(os.getenv("PORT", "5000")), debug=False)
+    app.run(host="0.0.0.0", port=int(os.getenv("PORT", "5000")), debug=False)
