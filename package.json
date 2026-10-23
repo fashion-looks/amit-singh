@@ -1,0 +1,9 @@
+{
+  "name": "amit-singh-control-desk",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Local-first responsive productivity dashboard starter kit",
+  "scripts": {"test": "node --test"},
+  "engines": {"node": ">=20"},
+  "license": "MIT"
+}
