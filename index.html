@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101426">
+<meta name="description" content="A private, local-first productivity dashboard for tasks and daily focus.">
+<title>Amit's Control Desk</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1020;--panel:#121a2f;--panel2:#17223b;--text:#eef3ff;--muted:#99a8c8;--line:#2b3958;--accent:#7c9cff;--good:#58d6ab;--warn:#ffd166}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 10% 0%,#1c2d51 0,transparent 35%),var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
+main{max-width:1100px;margin:auto;padding:22px}header{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:8px 0 26px}.eyebrow{color:var(--good);font-weight:700;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase}h1{font-size:clamp(1.9rem,5vw,3rem);margin:.25rem 0}.sub{color:var(--muted);margin:0}.clock{border:1px solid var(--line);background:#10182b;border-radius:14px;padding:12px 16px;color:var(--muted);font-variant-numeric:tabular-nums}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px}.card{background:linear-gradient(145deg,rgba(23,34,59,.96),rgba(15,23,42,.96));border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 15px 35px #0002;min-width:0}.stats{grid-column:span 4}.tasks{grid-column:span 8}.focus{grid-column:span 4}.card h2{margin:0 0 14px;font-size:1.1rem}.metric{font-size:2rem;font-weight:800;letter-spacing:-.04em}.muted{color:var(--muted);font-size:.9rem}.progress{height:7px;background:#26324f;border-radius:999px;overflow:hidden;margin-top:14px}.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--good));transition:width .35s}
+form{display:flex;gap:9px;flex-wrap:wrap}input,select{background:#0c1426;border:1px solid var(--line);color:var(--text);border-radius:10px;padding:12px;font:inherit;min-width:0}input:focus,select:focus{outline:2px solid var(--accent);outline-offset:2px}#taskInput{flex:1;min-width:160px}.btn{border:1px solid var(--accent);background:transparent;color:var(--text);border-radius:11px;padding:11px 14px;font:600 .95rem system-ui;cursor:pointer;transition:transform .15s,background .2s,border-color .2s}.btn:hover{background:#7c9cff22}.btn:active{transform:scale(.96)}.btn.primary{background:var(--accent);color:#081026;border-color:var(--accent)}.btn.small{padding:6px 9px;font-size:.82rem}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.tasklist{display:grid;gap:9px;margin-top:16px}.task{display:flex;gap:10px;align-items:flex-start;padding:12px;background:#0d1629;border:1px solid var(--line);border-radius:12px}.task input{margin-top:5px;accent-color:var(--good)}.task-text{flex:1;overflow-wrap:anywhere}.task.done .task-text{text-decoration:line-through;color:var(--muted)}.priority{font-size:.7rem;color:var(--warn);border:1px solid #8b6d2d;border-radius:999px;padding:2px 7px;white-space:nowrap}.task-actions{display:flex;gap:5px}.empty{color:var(--muted);text-align:center;padding:24px;border:1px dashed var(--line);border-radius:12px}
+.focusline{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line)}.focusline:last-child{border:0}.notice{margin-top:16px;font-size:.8rem;color:var(--muted)}footer{color:var(--muted);text-align:center;font-size:.8rem;padding:25px 0}
+@media(max-width:760px){main{padding:15px}.stats{grid-column:span 6}.tasks,.focus{grid-column:span 12}.clock{width:100%}.card{padding:16px}}@media(max-width:430px){.stats{grid-column:span 12}form>*{width:100%}.task{flex-wrap:wrap}.task-actions{margin-left:auto}}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div><div class="eyebrow">Personal workspace · local-first</div><h1>Control Desk</h1><p class="sub">Plan clearly. Execute consistently. Review honestly.</p></div>
+  <div class="clock" aria-live="polite"><div id="today">Loading date…</div><strong id="clock">--:--:--</strong></div>
+</header>
+<section class="grid" aria-label="Dashboard">
+  <article class="card stats"><h2>Tasks completed</h2><div class="metric" id="completedMetric">0 / 0</div><div class="muted">Execution snapshot</div><div class="progress"><span id="progressBar"></span></div></article>
+  <article class="card stats"><h2>Open priorities</h2><div class="metric" id="openMetric">0</div><div class="muted">Work still to move forward</div></article>
+  <article class="card stats"><h2>Local storage</h2><div class="metric" id="storageMetric">Ready</div><div class="muted">Saved in this browser only</div></article>
+  <article class="card tasks">
+    <h2>Task board</h2>
+    <form id="taskForm">
+      <input id="taskInput" name="task" maxlength="180" placeholder="Add a task…" aria-label="Task title" required>
+      <select id="priorityInput" aria-label="Task priority"><option value="Normal">Normal</option><option value="High">High priority</option></select>
+      <button class="btn primary" type="submit">＋ Add task</button>
+    </form>
+    <div class="toolbar">
+      <select id="filter" aria-label="Filter tasks"><option value="all">All tasks</option><option value="open">Open only</option><option value="done">Completed only</option></select>
+      <button class="btn" id="exportBtn" type="button">Export CSV</button>
+      <button class="btn" id="clearDoneBtn" type="button">Clear completed</button>
+    </div>
+    <div id="taskList" class="tasklist" aria-live="polite"></div>
+    <p class="notice">Tip: use CSV export for a backup. Clearing completed tasks cannot be undone.</p>
+  </article>
+  <article class="card focus"><h2>Daily operating principles</h2>
+    <div class="focusline"><span>🎯 One main outcome</span><span class="muted">Focus</span></div>
+    <div class="focusline"><span>📈 Move one business metric</span><span class="muted">Growth</span></div>
+    <div class="focusline"><span>🧠 Learn something useful</span><span class="muted">Skills</span></div>
+    <div class="focusline"><span>🌙 Protect rest and recovery</span><span class="muted">Balance</span></div>
+    <p class="notice">This is a planning aid, not an automatic background agent. It only runs while the page is open.</p>
+  </article>
+</section>
+<footer>Amit Singh · Starter Kit · No account or server required</footer>
+</main>
+<script>
+(() => {
+  'use strict';
+  const KEY = 'amit-control-desk-tasks-v1';
+  const $ = selector => document.querySelector(selector);
+  let tasks = loadTasks();
+  function loadTasks() {
+    try {
+      const parsed = JSON.parse(localStorage.getItem(KEY) || '[]');
+      return Array.isArray(parsed) ? parsed.filter(t => t && typeof t.id === 'string' && typeof t.text === 'string') : [];
+    } catch (error) { console.warn('Could not load saved tasks:', error); return []; }
+  }
+  function saveTasks() {
+    try { localStorage.setItem(KEY, JSON.stringify(tasks)); $('#storageMetric').textContent = 'Ready'; }
+    catch (error) { $('#storageMetric').textContent = 'Limited'; console.error('Saving failed; export a CSV backup.', error); }
+    render();
+  }
+  function render() {
+    const filter = $('#filter').value;
+    const shown = tasks.filter(t => filter === 'all' || (filter === 'open' && !t.done) || (filter === 'done' && t.done));
+    $('#taskList').replaceChildren();
+    if (!shown.length) {
+      const empty = document.createElement('div'); empty.className = 'empty';
+      empty.textContent = tasks.length ? 'No tasks match this filter.' : 'Your task list is clear. Add the first task above.';
+      $('#taskList').append(empty);
+    }
+    shown.forEach(task => {
+      const row = document.createElement('div'); row.className = 'task' + (task.done ? ' done' : '');
+      const check = document.createElement('input'); check.type = 'checkbox'; check.checked = task.done; check.setAttribute('aria-label', 'Mark task complete');
+      check.addEventListener('change', () => { task.done = check.checked; saveTasks(); });
+      const title = document.createElement('span'); title.className = 'task-text'; title.textContent = task.text;
+      const priority = document.createElement('span'); priority.className = 'priority'; priority.textContent = task.priority || 'Normal';
+      const actions = document.createElement('div'); actions.className = 'task-actions';
+      const remove = document.createElement('button'); remove.className = 'btn small'; remove.type = 'button'; remove.textContent = 'Delete'; remove.setAttribute('aria-label', 'Delete task');
+      remove.addEventListener('click', () => { tasks = tasks.filter(t => t.id !== task.id); saveTasks(); });
+      actions.append(remove); row.append(check, title, priority, actions); $('#taskList').append(row);
+    });
+    const done = tasks.filter(t => t.done).length;
+    $('#completedMetric').textContent = done + ' / ' + tasks.length;
+    $('#openMetric').textContent = String(tasks.length - done);
+    $('#progressBar').style.width = (tasks.length ? done / tasks.length * 100 : 0) + '%';
+  }
+  function updateClock() {
+    const now = new Date();
+    $('#today').textContent = now.toLocaleDateString(undefined, {weekday:'short',year:'numeric',month:'short',day:'numeric'});
+    $('#clock').textContent = now.toLocaleTimeString();
+  }
+  $('#taskForm').addEventListener('submit', event => {
+    event.preventDefault();
+    const input = $('#taskInput'), text = input.value.trim();
+    if (!text) { input.focus(); return; }
+    const id = globalThis.crypto?.randomUUID ? crypto.randomUUID() : String(Date.now()) + Math.random().toString(16).slice(2);
+    tasks.unshift({id, text, priority:$('#priorityInput').value, done:false, createdAt:new Date().toISOString()});
+    input.value = ''; saveTasks(); input.focus();
+  });
+  $('#filter').addEventListener('change', render);
+  $('#clearDoneBtn').addEventListener('click', () => {
+    if (!tasks.some(t => t.done)) return;
+    if (confirm('Delete all completed tasks? This cannot be undone.')) { tasks = tasks.filter(t => !t.done); saveTasks(); }
+  });
+  $('#exportBtn').addEventListener('click', () => {
+    const quote = value => '"' + String(value ?? '').replace(/"/g, '""') + '"';
+    const csv = [['Task','Priority','Completed','Created at'],...tasks.map(t=>[t.text,t.priority,t.done?'Yes':'No',t.createdAt||''])].map(row=>row.map(quote).join(',')).join('\r\n');
+    const blob = new Blob(['\ufeff'+csv], {type:'text/csv;charset=utf-8;'}), url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = 'control-desk-tasks.csv'; a.click(); URL.revokeObjectURL(url);
+  });
+  updateClock(); setInterval(updateClock, 1000); render();
+})();
+</script>
+</body>
+</html>
