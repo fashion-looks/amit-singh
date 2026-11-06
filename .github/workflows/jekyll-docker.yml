@@ -17,20 +17,30 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Prepare workspace
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p _site
+
+      - name: Validate static site inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -f index.md ] || [ -f index.html ] || [ -f README.md ]; then
+            echo "Site entry point found."
+          else
+            echo "No index.md, index.html, or README.md found; Jekyll will still build any available pages."
+          fi
+
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.3"
-          bundler-cache: true
+          bundler-cache: false
 
       - name: Install Jekyll
-        run: |
-          gem install jekyll bundler --no-document
+        run: gem install jekyll --no-document
 
       - name: Build site
-        run: |
-          if [ -f Gemfile ]; then
-            bundle exec jekyll build --future
-          else
-            jekyll build --future
-          fi
+        run: jekyll build --future --destination _site
