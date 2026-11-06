@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b1020">
+<meta name="description" content="A calm, private focus reset to protect your attention and choose what matters today.">
+<title>Mind Reset — Protect Your Focus</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1020;--panel:#121a2d;--panel2:#172238;--line:#283650;--text:#eef3ff;--muted:#9aa9c2;--mint:#8ce6c2;--blue:#8db7ff;--gold:#f2ce86;--red:#ff9c9c}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 12% 0%,#1c3150 0,transparent 38%),var(--bg);color:var(--text);font:16px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
+.wrap{max-width:1080px;margin:auto;padding:28px 20px 60px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:34px}.brand{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--mint);font-weight:800}.date{font-size:13px;color:var(--muted)}
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:22px;align-items:stretch}.intro,.visual,.card{background:linear-gradient(145deg,rgba(24,36,59,.96),rgba(15,24,41,.96));border:1px solid var(--line);border-radius:24px;box-shadow:0 18px 55px #0003}
+.intro{padding:clamp(24px,5vw,48px)}.eyebrow{color:var(--mint);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}.intro h1{font-size:clamp(36px,6vw,64px);line-height:1.04;letter-spacing:-.045em;margin:14px 0}.intro h1 span{color:var(--mint)}.intro p{color:var(--muted);max-width:580px;margin:18px 0 25px}.quote{border-left:3px solid var(--gold);padding:9px 0 9px 15px;color:#f8e7c4;font-size:15px}
+.visual{display:grid;place-items:center;min-height:300px;position:relative;overflow:hidden;padding:25px}.orbit{width:min(250px,70vw);aspect-ratio:1;border:1px solid #49617f;border-radius:50%;display:grid;place-items:center;position:relative;background:radial-gradient(circle,#263d5c,#15243c 68%,transparent 69%);box-shadow:0 0 70px #8ce6c222}.orbit:before,.orbit:after{content:"";position:absolute;border:1px dashed #58708d;border-radius:50%;inset:18px}.orbit:after{inset:38px;border-style:solid;opacity:.45}.brain{font-size:88px;filter:drop-shadow(0 12px 18px #0006)}.orbit-label{position:absolute;bottom:22px;font-size:11px;letter-spacing:.18em;color:var(--mint);text-transform:uppercase;font-weight:800}.spark{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 16px var(--gold)}.s1{top:17%;left:20%}.s2{right:16%;top:32%;background:var(--mint)}.s3{bottom:22%;left:17%;background:var(--blue)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:20px}.card{padding:23px}.card h2{font-size:19px;margin:0 0 5px}.sub{color:var(--muted);font-size:13px;margin:0 0 17px}.field{width:100%;background:#0b1425;border:1px solid #334663;border-radius:12px;color:var(--text);padding:13px 14px;font:inherit;outline:none;resize:vertical}.field:focus{border-color:var(--mint);box-shadow:0 0 0 3px #8ce6c21c}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}.btn{border:1px solid var(--mint);color:var(--mint);background:transparent;border-radius:12px;padding:10px 15px;font-weight:750;font-size:13px;cursor:pointer;transition:transform .18s,background .18s,color .18s}.btn:hover{background:var(--mint);color:#0b1721;transform:translateY(-2px)}.btn:active{transform:scale(.97)}.btn.primary{background:var(--mint);color:#0b1721}.btn.secondary{border-color:#526987;color:#c6d5ed}.btn.danger{border-color:#8b515b;color:#ffb5b5}
+.list{display:grid;gap:9px;margin-top:13px}.item{display:flex;align-items:flex-start;gap:10px;padding:12px;border:1px solid #2b3b56;background:#0d1728;border-radius:12px}.item input{accent-color:var(--mint);margin-top:5px}.item label{flex:1;overflow-wrap:anywhere}.item.done label{color:#7889a4;text-decoration:line-through}.item button{background:none;border:0;color:#8395b0;cursor:pointer;font-size:18px}.empty{color:#7f91ad;font-size:13px;padding:13px;border:1px dashed #33445f;border-radius:12px}
+.metrics{display:flex;gap:10px;margin-top:14px}.metric{flex:1;background:#0c1628;border:1px solid #2a3a54;border-radius:12px;padding:12px}.metric strong{display:block;font-size:22px;color:var(--mint)}.metric small{color:var(--muted)}
+.footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:#71829d;font-size:12px;margin-top:25px}.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);opacity:0;background:#e5fff5;color:#10251e;padding:11px 16px;border-radius:12px;font-weight:750;font-size:13px;transition:.25s;pointer-events:none}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:760px){.wrap{padding:18px 14px 40px}.hero,.grid{grid-template-columns:1fr}.visual{min-height:250px}.top{margin-bottom:22px}.intro{padding:26px}.metrics{gap:7px}.metric{padding:10px}.metric strong{font-size:19px}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<header class="top"><div class="brand">✦ Mind Reset</div><div class="date" id="today"></div></header>
+<section class="hero">
+  <div class="intro">
+    <div class="eyebrow">Attention is your asset</div>
+    <h1>Protect your <span>peace.</span><br>Choose your focus.</h1>
+    <p>You do not have to solve every situation or carry every conversation in your head. Notice the thought, write down what is useful, and return to the next action you can control.</p>
+    <div class="quote">“Give your attention to what you can influence. Let the rest wait.”</div>
+  </div>
+  <div class="visual" aria-label="A calm focus illustration"><div class="orbit"><span class="spark s1"></span><span class="spark s2"></span><span class="spark s3"></span><div class="brain">🧠</div><div class="orbit-label">Mind • Clarity • Action</div></div></div>
+</section>
+<section class="grid">
+  <article class="card">
+    <h2>01 / Park a thought</h2><p class="sub">Write it down instead of replaying it.</p>
+    <textarea id="thought" class="field" rows="3" maxlength="300" placeholder="What is taking up my attention?"></textarea>
+    <div class="actions"><button class="btn primary" id="park">Save thought</button><button class="btn secondary" id="clearThought">Clear</button></div>
+    <div id="thoughtList" class="list"><div class="empty">No thoughts parked yet. You can add one above.</div></div>
+  </article>
+  <article class="card">
+    <h2>02 / Return to what matters</h2><p class="sub">Choose one small action within your control.</p>
+    <textarea id="task" class="field" rows="3" maxlength="180" placeholder="My next useful action is…"></textarea>
+    <div class="actions"><button class="btn primary" id="addTask">Add action</button><button class="btn secondary" id="resetTasks">Reset list</button></div>
+    <div id="taskList" class="list"><div class="empty">Your action list is clear. Add one small next step.</div></div>
+    <div class="metrics"><div class="metric"><strong id="doneCount">0</strong><small>Completed</small></div><div class="metric"><strong id="totalCount">0</strong><small>Total actions</small></div></div>
+  </article>
+</section>
+<section class="card" style="margin-top:18px">
+  <h2>03 / A 60-second reset</h2><p class="sub">A short pause to shift attention back to the present.</p>
+  <ol style="color:#c4d0e3;padding-left:21px;margin:8px 0 18px"><li>Pause and take three comfortable, unforced breaths.</li><li>Name the situation: “This is a thought, not a task I must solve right now.”</li><li>Ask: “What is one useful thing I can do next?”</li></ol>
+  <button class="btn primary" id="reset">Start my reset</button> <span id="resetMessage" style="color:var(--mint);font-size:13px;margin-left:8px" aria-live="polite"></span>
+</section>
+<footer class="footer"><span>Mind Reset • Personal focus workspace</span><span>Your entries stay in this browser on this device.</span></footer>
+</main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+const $=id=>document.getElementById(id);
+const KEY='mind-reset-v1';
+let data={thoughts:[],tasks:[]};
+try{data={...data,...JSON.parse(localStorage.getItem(KEY)||'{}')}}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(data))}catch(e){notify('Browser storage is unavailable.')}};
+const notify=msg=>{const t=$('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2100)};
+$('today').textContent=new Intl.DateTimeFormat(undefined,{weekday:'long',day:'numeric',month:'short',year:'numeric'}).format(new Date());
+function renderThoughts(){const root=$('thoughtList');root.innerHTML='';if(!data.thoughts.length){root.innerHTML='<div class="empty">No thoughts parked yet. You can add one above.</div>';return}data.thoughts.forEach((v,i)=>{const el=document.createElement('div');el.className='item';const label=document.createElement('label');label.textContent=v;const del=document.createElement('button');del.type='button';del.textContent='×';del.setAttribute('aria-label','Delete thought');del.onclick=()=>{data.thoughts.splice(i,1);save();renderThoughts()};el.append(label,del);root.append(el)})}
+function renderTasks(){const root=$('taskList');root.innerHTML='';if(!data.tasks.length){root.innerHTML='<div class="empty">Your action list is clear. Add one small next step.</div>'}data.tasks.forEach((v,i)=>{const el=document.createElement('div');el.className='item'+(v.done?' done':'');const cb=document.createElement('input');cb.type='checkbox';cb.checked=!!v.done;cb.setAttribute('aria-label','Mark action complete');cb.onchange=()=>{v.done=cb.checked;save();renderTasks()};const label=document.createElement('label');label.textContent=v.text;const del=document.createElement('button');del.type='button';del.textContent='×';del.setAttribute('aria-label','Delete action');del.onclick=()=>{data.tasks.splice(i,1);save();renderTasks()};el.append(cb,label,del);root.append(el)});$('doneCount').textContent=data.tasks.filter(x=>x.done).length;$('totalCount').textContent=data.tasks.length}
+$('park').onclick=()=>{const v=$('thought').value.trim();if(!v)return notify('Write a thought first.');data.thoughts.unshift(v);$('thought').value='';save();renderThoughts();notify('Thought parked. Return to your next step.')};
+$('clearThought').onclick=()=>$('thought').value='';
+$('addTask').onclick=()=>{const v=$('task').value.trim();if(!v)return notify('Add one small action first.');data.tasks.push({text:v,done:false});$('task').value='';save();renderTasks();notify('Action added.')};
+$('resetTasks').onclick=()=>{if(!data.tasks.length)return;data.tasks=[];save();renderTasks();notify('Action list reset.')};
+$('reset').onclick=()=>{$('resetMessage').textContent='Take a moment. Breathe comfortably, then choose one next action.';notify('Reset started — no rush.')};
+renderThoughts();renderTasks();
+</script>
+</body>
+</html>
