@@ -41,9 +41,8 @@ jobs:
           set -euo pipefail
           pom_file="$(find . -name pom.xml -print -quit)"
           if [ -n "$pom_file" ]; then
-            echo "Found Maven project at $pom_file"
             mvn -B -ntp -f "$pom_file" verify
           else
-            echo "No Maven pom.xml found. This repository currently contains AEM starter examples, not a generated Maven project."
-            echo "Maven build skipped; structure validation completed."
+            echo "No pom.xml found. This repository contains AEM starter examples, not a generated Maven application."
+            echo "Structure validation passed; Maven build skipped."
           fi
