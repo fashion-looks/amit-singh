@@ -1,0 +1,32 @@
+name: AEM Maven validation
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+      - name: Verify Maven project when present
+        shell: bash
+        run: |
+          if find . -maxdepth 4 -name pom.xml -print -quit | grep -q .; then
+            mvn -B -ntp -DskipTests=false verify
+          else
+            echo "No pom.xml found. Documentation-only starter; Maven build skipped."
+          fi
