@@ -1,0 +1,12 @@
+<sly data-sly-use.model="com.fashionlooks.aemcloudstarter.core.models.PromoModel"></sly>
+<section class="cmp-promo" aria-label="Promotion">
+  <div class="cmp-promo__content">
+    <h2 data-sly-test="${model.title}" class="cmp-promo__title">${model.title}</h2>
+    <p data-sly-test="${model.description}" class="cmp-promo__description">${model.description}</p>
+    <a data-sly-test="${model.validCta}"
+       class="cmp-promo__cta"
+       href="${model.ctaUrl @ context='uri'}">
+      ${model.ctaLabel}
+    </a>
+  </div>
+</section>
