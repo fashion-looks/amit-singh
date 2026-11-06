@@ -1,0 +1,25 @@
+name: Daily Mind & Body Project Check
+
+on:
+  schedule:
+    # Runs daily at 08:00 India Standard Time (02:30 UTC).
+    - cron: "30 2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Verify daily dashboard exists
+        run: test -s mind-body/index.html
+      - name: Validate HTML structure markers
+        run: |
+          grep -q '<html lang="en">' mind-body/index.html
+          grep -q 'Mind &amp; Body' mind-body/index.html || grep -q 'Mind & Body' mind-body/index.html
+          grep -q 'localStorage' mind-body/index.html
+          echo "Daily Mind & Body dashboard check passed."
