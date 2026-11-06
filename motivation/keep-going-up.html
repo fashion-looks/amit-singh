@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f4ead7">
+<meta name="description" content="A daily reminder to keep climbing, one step at a time.">
+<title>Keep Going Up — One Reason Is Enough</title>
+<style>
+:root{--ink:#26251f;--muted:#6d6a5e;--paper:#f8f1e4;--leaf:#52664b;--gold:#c69a53;--line:#d9cbb2}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 12% 8%,#fffaf0 0,transparent 35%),linear-gradient(135deg,#f8f1e4,#eee2cd);color:var(--ink);font-family:Georgia,'Times New Roman',serif;min-height:100vh}
+.page{width:min(1120px,100%);margin:auto;padding:24px clamp(16px,4vw,44px) 42px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 0 20px;border-bottom:1px solid var(--line);font:600 12px/1.4 system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.brand{display:flex;align-items:center;gap:9px}.brand-mark{width:28px;height:28px;border:1px solid var(--leaf);border-radius:50%;display:grid;place-items:center;color:var(--leaf);font-size:16px}
+main{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(300px,.95fr);gap:clamp(20px,5vw,64px);align-items:center;padding:clamp(28px,6vw,70px) 0 34px}
+.eyebrow{font:700 11px system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--leaf)}
+h1{font-size:clamp(42px,6.2vw,76px);line-height:.98;letter-spacing:-.045em;margin:16px 0 22px;font-weight:500}
+h1 em{color:var(--leaf);font-weight:400}
+.lead{font-size:clamp(17px,2vw,21px);line-height:1.65;color:#5f5a4d;max-width:510px}
+.quote{margin:28px 0 26px;padding:18px 0 18px 20px;border-left:3px solid var(--gold);font-size:clamp(20px,2.6vw,27px);line-height:1.42}
+.quote strong{font-weight:600;color:#343329}
+.actions{display:flex;gap:12px;flex-wrap:wrap}
+button{border:1px solid var(--leaf);border-radius:999px;background:transparent;color:var(--leaf);padding:13px 20px;font:700 12px system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:transform .2s,background .2s,color .2s,box-shadow .2s}
+button:hover{background:var(--leaf);color:#fff;transform:translateY(-3px);box-shadow:0 8px 20px #52664b30}button:active{transform:scale(.96)}
+button.primary{background:var(--leaf);color:white}button.primary:hover{background:#394b34}
+.art{position:relative;background:linear-gradient(160deg,#fdf8ed,#eee1c9);border:1px solid #e1d4bd;border-radius:220px 220px 26px 26px;padding:16px;box-shadow:0 22px 60px #64533314;overflow:hidden}
+.art:before{content:"";position:absolute;inset:12px;border:1px solid #e4d6bd;border-radius:210px 210px 18px 18px;pointer-events:none}
+svg{display:block;width:100%;height:auto;position:relative}
+.sway{transform-origin:50% 18%;animation:sway 5s ease-in-out infinite}.climber{animation:climb 3.8s ease-in-out infinite alternate}
+@keyframes sway{0%,100%{transform:rotate(-1deg)}50%{transform:rotate(1deg)}}@keyframes climb{from{transform:translateY(5px)}to{transform:translateY(-5px)}}
+.bottom{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px}
+.mini{border-top:1px solid var(--line);padding:14px 4px 0}.mini b{display:block;font:700 11px system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--leaf);margin-bottom:7px}.mini span{font-size:14px;line-height:1.45;color:var(--muted)}
+.reason{margin-top:38px;padding:22px 24px;background:#fffaf0a8;border:1px solid var(--line);border-radius:18px}
+.reason-head{display:flex;justify-content:space-between;align-items:center;gap:10px;font:700 11px system-ui,sans-serif;letter-spacing:.13em;text-transform:uppercase;color:var(--leaf)}
+.reason p{font-size:18px;line-height:1.5;margin:13px 0 0}
+footer{border-top:1px solid var(--line);margin-top:36px;padding-top:18px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--muted);font:11px system-ui,sans-serif;letter-spacing:.08em}
+@media(max-width:760px){main{grid-template-columns:1fr;padding-top:32px}.art{width:min(520px,100%);margin:0 auto;order:2}.copy{order:1}.bottom{grid-template-columns:1fr 1fr 1fr}.topbar{font-size:10px}}
+@media(max-width:420px){.page{padding-inline:15px}.bottom{grid-template-columns:1fr}.mini{display:flex;gap:12px;align-items:baseline}.mini b{min-width:92px}.actions button{flex:1;padding:12px 10px}.reason{padding:18px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="page">
+<header class="topbar"><div class="brand"><span class="brand-mark">↑</span><span>Keep Going Up</span></div><span>A reminder for every season</span></header>
+<main>
+<section class="copy">
+<div class="eyebrow">Courage · Patience · Progress</div>
+<h1>One reason.<br><em>One more step.</em></h1>
+<p class="lead">The climb can feel heavy. You do not have to solve everything today. Hold on to the dream, focus on the next safe step, and keep building at your own pace.</p>
+<div class="quote">“When everything is trying to bring you down, find one reason to <strong>keep going up.</strong>”</div>
+<div class="actions"><button class="primary" id="reasonBtn">Give me a reason ↑</button><button id="focusBtn">My next small step</button></div>
+<div class="reason" aria-live="polite"><div class="reason-head"><span id="cardLabel">Today's reminder</span><span>✦</span></div><p id="reasonText">Your dreams deserve consistent effort. Small progress is still progress.</p></div>
+<div class="bottom"><div class="mini"><b>01 · Believe</b><span>Keep your dreams in sight.</span></div><div class="mini"><b>02 · Release</b><span>Let go of fear and doubt.</span></div><div class="mini"><b>03 · Rise</b><span>Take the next practical step.</span></div></div>
+</section>
+<section class="art" aria-label="Illustration of a person climbing a palm tree while leaving heavy worries below">
+<svg viewBox="0 0 520 650" role="img" aria-labelledby="artTitle artDesc">
+<title id="artTitle">Keep climbing toward your dreams</title><desc id="artDesc">A hopeful climber holds a palm tree. Dream coconuts are above, while worry stones remain below.</desc>
+<defs>
+<linearGradient id="trunk" x1="0" x2="1"><stop stop-color="#8e7755"/><stop offset=".5" stop-color="#c1a47b"/><stop offset="1" stop-color="#806b4e"/></linearGradient>
+<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#f7edda"/><stop offset="1" stop-color="#eadfc9"/></linearGradient>
+</defs>
+<rect x="0" y="0" width="520" height="650" rx="18" fill="url(#sky)"/>
+<circle cx="410" cy="145" r="56" fill="#fff7df" opacity=".55"/>
+<path d="M0 510 Q110 480 205 510 T520 500 V650 H0Z" fill="#e3d5b9"/>
+<path d="M0 535 Q110 515 210 535 T520 525" fill="none" stroke="#c9b996" stroke-width="2"/>
+<g class="sway" fill="none" stroke="#647456" stroke-linecap="round">
+<path d="M258 150 Q115 8 24 95 Q135 45 258 150" stroke-width="8"/><path d="M260 148 Q390 -5 500 70 Q370 55 260 148" stroke-width="8"/>
+<path d="M258 145 Q185 12 130 18 Q185 72 258 145" stroke-width="6"/><path d="M262 145 Q320 5 390 18 Q330 65 262 145" stroke-width="6"/>
+<path d="M258 145 Q95 125 40 230 Q130 175 258 145" stroke-width="7"/><path d="M260 145 Q420 110 490 220 Q390 165 260 145" stroke-width="7"/>
+<path d="M258 145 Q210 65 210 5 M262 145 Q285 45 310 0" stroke-width="5"/>
+</g>
+<g fill="#b18d5f" stroke="#705c43" stroke-width="2"><ellipse cx="224" cy="115" rx="35" ry="42"/><ellipse cx="260" cy="102" rx="35" ry="44"/><ellipse cx="296" cy="115" rx="35" ry="42"/></g>
+<g fill="#4b392c" font-family="Georgia" font-size="13" font-weight="bold" text-anchor="middle"><text x="224" y="119">DREAM</text><text x="260" y="106">DREAM</text><text x="296" y="119">DREAM</text></g>
+<path d="M247 143 Q230 350 248 585 L302 585 Q315 355 278 143Z" fill="url(#trunk)" stroke="#725e43" stroke-width="3"/>
+<g fill="none" stroke="#755f43" stroke-width="2" opacity=".8"><path d="M245 190 Q275 205 293 188 M243 230 Q270 246 298 228 M242 272 Q272 287 301 270 M242 316 Q272 330 303 314 M244 360 Q275 374 305 358 M245 405 Q275 419 306 403 M247 450 Q278 464 307 448 M249 495 Q280 508 307 492 M251 540 Q280 554 305 538"/></g>
+<g class="climber" stroke="#594c3c" stroke-width="3" stroke-linejoin="round">
+<path d="M252 296 Q214 288 199 318 L202 382 Q224 397 253 377Z" fill="#e7dfcf"/>
+<path d="M207 316 Q184 302 177 280 L183 272 Q204 286 221 305" fill="#d8b28b"/>
+<path d="M247 318 Q274 288 287 266 L296 270 Q288 309 263 345" fill="#d8b28b"/>
+<circle cx="216" cy="266" r="31" fill="#d8b28b"/>
+<path d="M187 265 Q187 230 219 232 Q244 235 247 258 Q230 246 216 253 Q203 267 187 265" fill="#51483d"/>
+<path d="M202 272 Q213 281 225 274" fill="none" stroke-width="2"/>
+<path d="M208 296 Q187 330 195 365 L222 385 L242 357 L237 310" fill="#8b7156"/>
+<path d="M200 371 Q184 410 202 435 L222 431 L222 380" fill="#d8b28b"/>
+<path d="M238 369 Q255 395 248 421 L230 430 L218 386" fill="#d8b28b"/>
+<path d="M202 431 Q180 444 191 455 L221 451 L225 436" fill="#d8b28b"/>
+<path d="M248 420 Q264 432 256 443 L226 438 L227 426" fill="#d8b28b"/>
+</g>
+<g fill="none" stroke="#8a6441" stroke-width="4"><path d="M177 380 Q225 405 278 380" /><path d="M177 380 L171 454 M278 380 L290 453"/></g>
+<g stroke="#78634b" stroke-width="2">
+<path d="M172 450 L172 480 M290 450 L290 480" stroke-dasharray="4 5"/>
+<path d="M172 480 L145 510 M172 480 L194 514 M290 480 L270 514" fill="none"/>
+</g>
+<g fill="#8f8068" stroke="#625440" stroke-width="2">
+<path d="M95 500 Q112 470 140 491 L155 530 Q142 558 109 550 Q86 535 95 500Z"/>
+<path d="M155 520 Q177 491 203 514 L207 555 Q185 574 158 555Z"/>
+<path d="M212 508 Q242 482 268 506 L279 546 Q255 568 225 550Z"/>
+<path d="M126 560 Q147 538 172 558 L179 596 Q153 618 128 593Z"/>
+<path d="M191 564 Q218 542 243 566 L247 604 Q219 624 195 602Z"/>
+</g>
+<g fill="#f7edda" font-family="system-ui" font-size="12" font-weight="800" text-anchor="middle"><text x="124" y="527">FEAR</text><text x="180" y="542">DOUBT</text><text x="245" y="531">REJECTION</text><text x="151" y="583">FAILURE</text><text x="219" y="590">OPINIONS</text></g>
+<path d="M22 615 Q120 600 220 616 T498 613" fill="none" stroke="#c5b493" stroke-width="2"/>
+</svg>
+</section>
+</main>
+<footer><span>KEEP YOUR DREAMS ABOVE THE NOISE.</span><span>ONE DAY · ONE STEP · KEEP RISING</span></footer>
+</div>
+<script>
+const reminders=[
+"Your future is built by the small promises you keep today.",
+"You do not need everyone's approval to make meaningful progress.",
+"One focused hour can move an important goal forward.",
+"Rest when you need to. Then return to the next useful step.",
+"Fear is a feeling, not a forecast. Check the facts and move thoughtfully.",
+"Your pace is allowed to be different. Consistency matters more than comparison.",
+"Ask for help when a challenge is bigger than one person."
+];
+const steps=["Write down the one task that matters most today.","Break a difficult task into a 10-minute first step.","Send one clear message that moves your work forward.","Learn one useful thing and apply it today.","Take a short pause, reset, and choose your next action."];
+const reasonText=document.getElementById("reasonText"),cardLabel=document.getElementById("cardLabel");
+let last=-1;
+document.getElementById("reasonBtn").addEventListener("click",()=>{
+ let n;do{n=Math.floor(Math.random()*reminders.length)}while(n===last&&reminders.length>1);last=n;
+ cardLabel.textContent="A reason to keep going";reasonText.textContent=reminders[n];
+});
+document.getElementById("focusBtn").addEventListener("click",()=>{
+ const n=Math.floor(Math.random()*steps.length);
+ cardLabel.textContent="Your next small step";reasonText.textContent=steps[n];
+});
+</script>
+</body>
+</html>
