@@ -3,8 +3,24 @@ name: Jekyll site CI
 on:
   push:
     branches: ["main"]
+    paths:
+      - "*.md"
+      - "*.html"
+      - "_config.yml"
+      - "_layouts/**"
+      - "_includes/**"
+      - "assets/**"
+      - ".github/workflows/jekyll-docker.yml"
   pull_request:
     branches: ["main"]
+    paths:
+      - "*.md"
+      - "*.html"
+      - "_config.yml"
+      - "_layouts/**"
+      - "_includes/**"
+      - "assets/**"
+      - ".github/workflows/jekyll-docker.yml"
   workflow_dispatch:
 
 permissions:
@@ -17,22 +33,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Prepare workspace
-        shell: bash
-        run: |
-          set -euo pipefail
-          mkdir -p _site
-
-      - name: Validate static site inputs
-        shell: bash
-        run: |
-          set -euo pipefail
-          if [ -f index.md ] || [ -f index.html ] || [ -f README.md ]; then
-            echo "Site entry point found."
-          else
-            echo "No index.md, index.html, or README.md found; Jekyll will still build any available pages."
-          fi
-
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -42,5 +42,5 @@ jobs:
       - name: Install Jekyll
         run: gem install jekyll --no-document
 
-      - name: Build site
+      - name: Build static site
         run: jekyll build --future --destination _site
