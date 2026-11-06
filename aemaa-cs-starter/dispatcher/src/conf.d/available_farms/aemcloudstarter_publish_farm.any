@@ -1,0 +1,27 @@
+# Illustrative only. Merge into the farm generated for your AEMaaCS project.
+# Validate syntax and allowlists with the matching Adobe Dispatcher Tools.
+
+ /publishfarm {
+   /clientheaders {
+     "*"
+   }
+
+   /virtualhosts {
+     "*"
+   }
+
+   /renders {
+     /rend01 {
+       /hostname "publish"
+       /port "4503"
+     }
+   }
+
+   /filter {
+     /0001 { /type "allow" /method "GET" /url "/content/*" }
+     /0002 { /type "allow" /method "HEAD" /url "/content/*" }
+     /0003 { /type "deny" /url "/libs/*" }
+     /0004 { /type "deny" /url "/apps/*" }
+     /0005 { /type "deny" /url "/system/*" }
+   }
+ }
