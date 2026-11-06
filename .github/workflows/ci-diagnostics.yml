@@ -1,0 +1,30 @@
+name: GitHub Actions Runner Diagnostics
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  runner-diagnostics:
+    name: Verify GitHub-hosted runner startup
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Print runner identity
+        run: |
+          echo "Runner diagnostics started."
+          echo "Runner OS: $RUNNER_OS"
+          echo "Runner architecture: $RUNNER_ARCH"
+          echo "GitHub ref: $GITHUB_REF"
+          echo "GitHub SHA: $GITHUB_SHA"
+      - name: Verify checkout
+        uses: actions/checkout@v4
+      - name: Verify shell
+        shell: bash
+        run: |
+          set -euo pipefail
+          pwd
+          git rev-parse --short HEAD
+          echo "Runner, checkout and shell are operational."
