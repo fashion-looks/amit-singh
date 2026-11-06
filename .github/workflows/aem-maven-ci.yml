@@ -39,7 +39,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          pom_file="$(find aemaa-cs-starter -name pom.xml -print -quit)"
+          pom_file="$(find . -name pom.xml -print -quit)"
           if [ -n "$pom_file" ]; then
             echo "Found Maven project at $pom_file"
             mvn -B -ntp -f "$pom_file" verify
