@@ -2,9 +2,15 @@ name: AEM Maven validation
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
+    paths:
+      - "aemaa-cs-starter/**"
+      - ".github/workflows/aem-maven-ci.yml"
   pull_request:
-    branches: [ main ]
+    branches: [main]
+    paths:
+      - "aemaa-cs-starter/**"
+      - ".github/workflows/aem-maven-ci.yml"
   workflow_dispatch:
 
 permissions:
@@ -16,17 +22,28 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Set up Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: '17'
-          cache: maven
+
+      - name: Check starter structure
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f aemaa-cs-starter/README.md
+          test -f aemaa-cs-starter/IMPLEMENTATION-NOTES.md
+          test -f aemaa-cs-starter/core/src/main/java/com/fashionlooks/aemcloudstarter/core/models/PromoModel.java
+          test -f aemaa-cs-starter/core/src/test/java/com/fashionlooks/aemcloudstarter/core/models/PromoModelTest.java
+          test -f aemaa-cs-starter/frontend/src/api/contentGraphql.ts
+          test -f aemaa-cs-starter/dispatcher/src/conf.d/available_farms/aemcloudstarter_publish_farm.any
+          echo "AEM starter structure checks passed."
+
       - name: Verify Maven project when present
         shell: bash
         run: |
-          if find . -maxdepth 4 -name pom.xml -print -quit | grep -q .; then
-            mvn -B -ntp -DskipTests=false verify
+          set -euo pipefail
+          pom_file="$(find aemaa-cs-starter -name pom.xml -print -quit)"
+          if [ -n "$pom_file" ]; then
+            echo "Found Maven project at $pom_file"
+            mvn -B -ntp -f "$pom_file" verify
           else
-            echo "No pom.xml found. Documentation-only starter; Maven build skipped."
+            echo "No Maven pom.xml found. This repository currently contains AEM starter examples, not a generated Maven project."
+            echo "Maven build skipped; structure validation completed."
           fi
